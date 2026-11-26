@@ -92,7 +92,7 @@
             }
             body {
                 background: #ffffff !important;
-                font-size: 12pt !important;
+                font-size: 13.5pt !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
@@ -107,6 +107,17 @@
                 display: block !important;
                 margin-bottom: 1.75rem !important;
                 animation: none !important;
+            }
+            /* 放大列印時的敘述文字與標題 */
+            main p, main li, main div {
+                font-size: 13.5pt !important;
+                line-height: 1.65 !important;
+            }
+            main h2 {
+                font-size: 17pt !important;
+            }
+            main h3 {
+                font-size: 15pt !important;
             }
             .brochure-container {
                 display: block !important;
@@ -124,6 +135,13 @@
             .print-avoid-break {
                 break-inside: avoid;
                 page-break-inside: avoid;
+            }
+            .print-page-break {
+                break-before: page;
+                page-break-before: always;
+            }
+            .print-only-block {
+                display: block !important;
             }
         }
     </style>
@@ -765,6 +783,9 @@
                 </div>
             </section>
 
+            <!-- ================= 列印專用：自動補齊 4 的倍數頁數（旅遊隨手筆記與封底） ================= -->
+            <div id="print-padding-pages" class="hidden"></div>
+
         </main>
 
         <!-- 底部手冊頁尾 -->
@@ -772,67 +793,7 @@
             山富國際旅行社股份有限公司 ｜ 祝您旅途愉快 Sawasdee Ka!
         </footer>
     </div>
-
-    <!-- 底部固定分頁導覽列 (Bottom Navigation Bar) -->
-    <nav class="no-print fixed bottom-0 left-0 right-0 z-40 flex justify-center pointer-events-none">
-        <div class="w-full max-w-2xl bg-white/95 backdrop-blur-md border-t-2 border-amber-400/60 shadow-[0_-4px_20px_rgba(45,32,12,0.12)] px-1.5 pt-2 pb-2.5 sm:rounded-t-2xl pointer-events-auto">
-            <div class="flex items-center justify-around gap-1" id="tab-nav">
-                <button onclick="switchTab('flight-hotel')" id="btn-flight-hotel" class="tab-btn active flex-1 flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl text-sm sm:text-base font-bold text-thai-teal bg-thai-goldLight/90 border border-amber-300/80 transition">
-                    <i class="fa-solid fa-plane-departure text-xl"></i>
-                    <span>航班飯店</span>
-                </button>
-                <button onclick="switchTab('itinerary')" id="btn-itinerary" class="tab-btn flex-1 flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl text-sm sm:text-base font-medium text-slate-600 hover:text-slate-900 transition">
-                    <i class="fa-solid fa-map-location-dot text-xl"></i>
-                    <span>每日行程</span>
-                </button>
-                <button onclick="switchTab('notices')" id="btn-notices" class="tab-btn flex-1 flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl text-sm sm:text-base font-medium text-slate-600 hover:text-slate-900 transition">
-                    <i class="fa-solid fa-circle-exclamation text-xl"></i>
-                    <span>注意事項</span>
-                </button>
-                <button onclick="switchTab('currency')" id="btn-currency" class="tab-btn flex-1 flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl text-sm sm:text-base font-medium text-slate-600 hover:text-slate-900 transition">
-                    <i class="fa-solid fa-coins text-xl"></i>
-                    <span>匯率換算</span>
-                </button>
-                <button onclick="switchTab('line-group')" id="btn-line-group" class="tab-btn flex-1 flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl text-sm sm:text-base font-medium text-slate-600 hover:text-slate-900 transition">
-                    <i class="fa-brands fa-line text-xl text-[#06C755]"></i>
-                    <span>導遊群組</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <script>
-        // 分頁切換邏輯（搭配底部導覽列樣式與自動捲動回頂部）
-        function switchTab(tabId) {
-            // 隱藏所有分頁內容
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(el => el.classList.add('hidden'));
-
-            // 重置所有分頁按鈕樣式
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('active', 'text-thai-teal', 'bg-thai-goldLight/90', 'border', 'border-amber-300/80', 'font-bold');
-                btn.classList.add('text-slate-600', 'font-medium');
-            });
-
-            // 顯示目標分頁內容
-            const targetContent = document.getElementById('tab-' + tabId);
-            if (targetContent) {
-                targetContent.classList.remove('hidden');
-            }
-
-            // 啟用目標按鈕樣式
-            const activeBtn = document.getElementById('btn-' + tabId);
-            if (activeBtn) {
-                activeBtn.classList.remove('text-slate-600', 'font-medium');
-                activeBtn.classList.add('active', 'text-thai-teal', 'bg-thai-goldLight/90', 'border', 'border-amber-300/80', 'font-bold');
-            }
-
-            // 切換分頁時平滑回到內容區頂部
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // 專屬列印函式：列印前主動移除 hidden 展開所有非匯率分頁，列印後自動復原
+        // 專屬列印函式：列印前主動展開所有非匯率分頁，並自動計算並補齊成 4 的倍數頁數（方便小冊子裝訂）
         function printBrochure() {
             const activeBtn = document.querySelector('.tab-btn.active');
             const currentTabId = activeBtn ? activeBtn.id.replace('btn-', '') : 'flight-hotel';
@@ -843,9 +804,86 @@
                 if (el) el.classList.remove('hidden');
             });
 
+            // 計算目前展開後的實際列印總頁數（以 A4 可印高度約 980px 估算）
+            const container = document.querySelector('.brochure-container');
+            const paddingBox = document.getElementById('print-padding-pages');
+            paddingBox.innerHTML = '';
+            paddingBox.classList.remove('hidden');
+
+            const a4PageHeightPx = 980;
+            const currentHeight = container.scrollHeight;
+            const estimatedPages = Math.max(1, Math.ceil(currentHeight / a4PageHeightPx));
+            const remainder = estimatedPages % 4;
+            const pagesToAdd = remainder === 0 ? 0 : (4 - remainder);
+
+            if (pagesToAdd > 0) {
+                let extraHtml = '';
+                for (let i = 0; i < pagesToAdd; i++) {
+                    const isLastCover = (i === pagesToAdd - 1);
+                    if (isLastCover) {
+                        // 最後一頁作為典雅泰式封底（同時附簡單備忘欄）
+                        extraHtml += `
+                            <section class="print-page-break pt-4 space-y-6">
+                                <div class="border-2 border-amber-400 rounded-3xl p-6 bg-thai-cream space-y-4">
+                                    <h3 class="font-black text-thai-teal flex items-center gap-2">
+                                        <span class="text-amber-600">❖</span>
+                                        <span>泰國必買伴手禮與隨手記帳欄</span>
+                                    </h3>
+                                    <div class="grid grid-cols-2 gap-3 text-slate-700">
+                                        <div>□ 手標泰式奶茶 / 椰子脆片</div>
+                                        <div>□ 皇家蜂蜜 / 牛奶片 / 小老闆海苔</div>
+                                        <div>□ 曼谷包 NaRaYa / 大象文創包</div>
+                                        <div>□ 薄荷吸鼻劑 / 青草膏 / 足貼</div>
+                                    </div>
+                                    <div class="space-y-4 pt-3">
+                                        <div class="border-b border-dashed border-amber-400 h-7"></div>
+                                        <div class="border-b border-dashed border-amber-400 h-7"></div>
+                                        <div class="border-b border-dashed border-amber-400 h-7"></div>
+                                        <div class="border-b border-dashed border-amber-400 h-7"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-[#0B5345] text-white rounded-3xl p-8 text-center space-y-3 border-2 border-amber-400">
+                                    <div class="text-amber-300 text-3xl"><i class="fa-solid fa-gopuram"></i></div>
+                                    <div class="font-black text-amber-200 tracking-widest">SAWADEE THAILAND</div>
+                                    <div class="font-bold">山富國際旅行社股份有限公司</div>
+                                    <div class="text-amber-100/90">團體編號：BKK05261209M ｜ 感謝您的參與，祝您旅途平安順心！</div>
+                                </div>
+                            </section>
+                        `;
+                    } else {
+                        // 中間補頁作為旅遊隨手筆記頁
+                        extraHtml += `
+                            <section class="print-page-break pt-4">
+                                <div class="border-2 border-amber-300 rounded-3xl p-6 bg-white space-y-5">
+                                    <h3 class="font-black text-thai-teal flex items-center gap-2 border-b-2 border-amber-300 pb-2">
+                                        <span class="text-amber-600">❖</span>
+                                        <span>旅遊隨手筆記 / 購物清單 Memo</span>
+                                    </h3>
+                                    <div class="space-y-6 pt-2">
+                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                    </div>
+                                </div>
+                            </section>
+                        `;
+                    }
+                }
+                paddingBox.innerHTML = extraHtml;
+            }
+
             window.print();
 
             setTimeout(() => {
+                paddingBox.innerHTML = '';
+                paddingBox.classList.add('hidden');
                 switchTab(currentTabId);
             }, 300);
         }
