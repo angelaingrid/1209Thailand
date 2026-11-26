@@ -104,20 +104,20 @@
             #tab-itinerary.tab-content,
             #tab-notices.tab-content,
             #tab-line-group.tab-content {
-                display: block !important;
-                margin-bottom: 1.75rem !important;
-                animation: none !important;
-            }
-            /* 放大列印時的敘述文字與標題 */
+            /* 放大列印時的敘述文字與標題（至少 16pt） */
             main p, main li, main div {
-                font-size: 13.5pt !important;
+                font-size: 16pt !important;
                 line-height: 1.65 !important;
             }
             main h2 {
-                font-size: 17pt !important;
+                font-size: 20pt !important;
+                break-after: avoid !important;
+                page-break-after: avoid !important;
             }
             main h3 {
-                font-size: 15pt !important;
+                font-size: 17.5pt !important;
+                break-after: avoid !important;
+                page-break-after: avoid !important;
             }
             .brochure-container {
                 display: block !important;
@@ -344,37 +344,39 @@
 
             <!-- ================= 分頁 2：每日行程 ================= -->
             <section id="tab-itinerary" class="tab-content hidden space-y-5">
-                <div class="flex items-center justify-between gap-2">
-                    <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
-                        <span class="text-amber-600 text-xl">❖</span>
-                        <span>五日精選行程表</span>
-                    </h2>
-                    <span class="text-sm sm:text-base bg-amber-100 text-amber-900 border border-amber-300 font-bold px-3.5 py-1 rounded-full shrink-0">全程無購物站壓力</span>
-                </div>
+                <div class="print-avoid-break space-y-5">
+                    <div class="flex items-center justify-between gap-2">
+                        <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
+                            <span class="text-amber-600 text-xl">❖</span>
+                            <span>五日精選行程表</span>
+                        </h2>
+                        <span class="text-sm sm:text-base bg-amber-100 text-amber-900 border border-amber-300 font-bold px-3.5 py-1 rounded-full shrink-0">全程無購物站壓力</span>
+                    </div>
 
-                <!-- Day 1 -->
-                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/70 shadow-sm relative overflow-hidden print-avoid-break">
-                    <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-amber-200/60">
-                        <div class="flex items-center gap-2.5">
-                            <span class="bg-gradient-to-r from-[#0B5345] to-[#117864] text-amber-200 border border-amber-400/50 text-base font-black px-3.5 py-1 rounded-lg">DAY 1</span>
-                            <span class="font-bold text-lg sm:text-xl text-slate-800">2026/12/09 (三)</span>
+                    <!-- Day 1 -->
+                    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/70 shadow-sm relative overflow-hidden">
+                        <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-amber-200/60">
+                            <div class="flex items-center gap-2.5">
+                                <span class="bg-gradient-to-r from-[#0B5345] to-[#117864] text-amber-200 border border-amber-400/50 text-base font-black px-3.5 py-1 rounded-lg">DAY 1</span>
+                                <span class="font-bold text-lg sm:text-xl text-slate-800">2026/12/09 (三)</span>
+                            </div>
+                            <span class="text-base text-amber-800 font-bold"><i class="fa-solid fa-plane mr-1 text-amber-600"></i>抵達曼谷</span>
                         </div>
-                        <span class="text-base text-amber-800 font-bold"><i class="fa-solid fa-plane mr-1 text-amber-600"></i>抵達曼谷</span>
-                    </div>
-                    <h3 class="font-bold text-lg sm:text-xl text-slate-900 mb-3 leading-snug">
-                        高雄小港機場 <i class="fa-solid fa-arrow-right text-sm text-amber-500 mx-1"></i> 曼谷素萬那普機場 <i class="fa-solid fa-arrow-right text-sm text-amber-500 mx-1"></i> 最接地氣 Save One Go 夜市
-                    </h3>
-                    <p class="text-base sm:text-lg text-slate-700 leading-relaxed mb-4 bg-thai-cream p-4 rounded-xl border border-amber-200/70">
-                        <strong class="text-thai-teal">【景點亮點】Save One Go 夜市：</strong>曼谷近年超人氣的在地人夜市！不同於觀光客擠滿的夜市，這裡匯集了道地泰式平價小吃、炭烤海鮮、泰式奶茶與潮流服飾，物價親民、氛圍輕鬆，是第一晚體驗曼谷夜生活與大啖美食的最佳去處。
-                    </p>
-                    <div class="grid grid-cols-3 gap-2 my-3.5 text-base bg-slate-50 p-3.5 rounded-xl border border-slate-200/70">
-                        <div><span class="text-slate-500 text-sm block mb-0.5">早餐</span><span class="font-medium text-slate-700">敬請自理</span></div>
-                        <div><span class="text-slate-500 text-sm block mb-0.5">午餐</span><span class="font-medium text-slate-700">機上簡餐</span></div>
-                        <div><span class="text-slate-500 text-sm block mb-0.5">晚餐</span><span class="font-bold text-thai-teal">樂來順或文華 中泰式合菜 (餐標 THB 350)</span></div>
-                    </div>
-                    <div class="flex items-center gap-2 text-base text-slate-800 bg-thai-goldLight/70 px-4 py-3 rounded-xl border border-amber-300/70">
-                        <i class="fa-solid fa-bed text-amber-700"></i>
-                        <span>住宿：<strong class="text-slate-900">曼谷五星 Avani Sukhumvit Bangkok</strong></span>
+                        <h3 class="font-bold text-lg sm:text-xl text-slate-900 mb-3 leading-snug">
+                            高雄小港機場 <i class="fa-solid fa-arrow-right text-sm text-amber-500 mx-1"></i> 曼谷素萬那普機場 <i class="fa-solid fa-arrow-right text-sm text-amber-500 mx-1"></i> 最接地氣 Save One Go 夜市
+                        </h3>
+                        <p class="text-base sm:text-lg text-slate-700 leading-relaxed mb-4 bg-thai-cream p-4 rounded-xl border border-amber-200/70">
+                            <strong class="text-thai-teal">【景點亮點】Save One Go 夜市：</strong>曼谷近年超人氣的在地人夜市！不同於觀光客擠滿的夜市，這裡匯集了道地泰式平價小吃、炭烤海鮮、泰式奶茶與潮流服飾，物價親民、氛圍輕鬆，是第一晚體驗曼谷夜生活與大啖美食的最佳去處。
+                        </p>
+                        <div class="grid grid-cols-3 gap-2 my-3.5 text-base bg-slate-50 p-3.5 rounded-xl border border-slate-200/70">
+                            <div><span class="text-slate-500 text-sm block mb-0.5">早餐</span><span class="font-medium text-slate-700">敬請自理</span></div>
+                            <div><span class="text-slate-500 text-sm block mb-0.5">午餐</span><span class="font-medium text-slate-700">機上簡餐</span></div>
+                            <div><span class="text-slate-500 text-sm block mb-0.5">晚餐</span><span class="font-bold text-thai-teal">樂來順或文華 中泰式合菜 (餐標 THB 350)</span></div>
+                        </div>
+                        <div class="flex items-center gap-2 text-base text-slate-800 bg-thai-goldLight/70 px-4 py-3 rounded-xl border border-amber-300/70">
+                            <i class="fa-solid fa-bed text-amber-700"></i>
+                            <span>住宿：<strong class="text-slate-900">曼谷五星 Avani Sukhumvit Bangkok</strong></span>
+                        </div>
                     </div>
                 </div>
 
@@ -495,32 +497,34 @@
 
             <!-- ================= 分頁 3：泰國旅遊注意事項 ================= -->
             <section id="tab-notices" class="tab-content hidden space-y-4">
-                <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
-                    <span class="text-amber-600 text-xl">❖</span>
-                    <span>泰國入境與行前必讀提醒</span>
-                </h2>
+                <div class="print-avoid-break space-y-4">
+                    <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
+                        <span class="text-amber-600 text-xl">❖</span>
+                        <span>泰國入境與行前必讀提醒</span>
+                    </h2>
 
-                <!-- 0. 泰國電子入境卡申報 (TDAC) -->
-                <div class="bg-white rounded-2xl p-4 sm:p-5 border-l-4 border-thai-teal border border-amber-200/80 shadow-sm space-y-3 print-avoid-break">
-                    <div class="flex items-center justify-between gap-2">
-                        <div class="flex items-center gap-2.5">
-                            <span class="text-2xl">📲</span>
-                            <h3 class="font-bold text-lg sm:text-xl text-slate-900">泰國電子入境卡申報（TDAC）</h3>
+                    <!-- 0. 泰國電子入境卡申報 (TDAC) -->
+                    <div class="bg-white rounded-2xl p-4 sm:p-5 border-l-4 border-thai-teal border border-amber-200/80 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5">
+                                <span class="text-2xl">📲</span>
+                                <h3 class="font-bold text-lg sm:text-xl text-slate-900">泰國電子入境卡申報（TDAC）</h3>
+                            </div>
+                            <span class="bg-thai-red text-amber-100 text-sm font-bold px-3 py-1 rounded-full shrink-0">出發前必填</span>
                         </div>
-                        <span class="bg-thai-red text-amber-100 text-sm font-bold px-3 py-1 rounded-full shrink-0">出發前必填</span>
+                        <p class="text-base sm:text-lg text-slate-700 leading-relaxed">
+                            入境泰國前需事先於線上完成<strong>泰國數位入境卡（Thailand Digital Arrival Card, TDAC）</strong>申報，請務必於<strong>抵達泰國前 72 小時（3天）內</strong>上網填寫：
+                        </p>
+                        <ul class="text-base text-slate-700 space-y-2 bg-thai-cream p-4 rounded-xl border border-amber-200/70 list-disc pl-5 leading-relaxed">
+                            <li><strong>準備資料：</strong>護照個人資料頁、去回程航班資訊（CI839 / CI840）、住宿飯店名稱（Avani Sukhumvit Bangkok Hotel）。</li>
+                            <li><strong>填寫完成後：</strong>系統會產生一組 <strong>QR Code 確認信</strong>（亦會寄至您的 Email），請務必<strong>手機截圖保存或列印出來</strong>，於曼谷機場通關時出示給移民官查驗。</li>
+                            <li><strong>官方網址：</strong><span class="font-mono text-sm break-all text-thai-teal">https://tdac.immigration.go.th/arrival-card/#/home</span></li>
+                        </ul>
+                        <a href="https://tdac.immigration.go.th/arrival-card/#/home" target="_blank" rel="noopener noreferrer" class="no-print w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#0B5345] to-[#117864] hover:from-[#094237] hover:to-[#0E6251] active:scale-[0.99] text-amber-100 font-bold py-3.5 px-4 rounded-xl text-base sm:text-lg shadow-sm border border-amber-400/40 transition">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-amber-300"></i>
+                            <span>前往泰國移民局 TDAC 官方申報網站</span>
+                        </a>
                     </div>
-                    <p class="text-base sm:text-lg text-slate-700 leading-relaxed">
-                        入境泰國前需事先於線上完成<strong>泰國數位入境卡（Thailand Digital Arrival Card, TDAC）</strong>申報，請務必於<strong>抵達泰國前 72 小時（3天）內</strong>上網填寫：
-                    </p>
-                    <ul class="text-base text-slate-700 space-y-2 bg-thai-cream p-4 rounded-xl border border-amber-200/70 list-disc pl-5 leading-relaxed">
-                        <li><strong>準備資料：</strong>護照個人資料頁、去回程航班資訊（CI839 / CI840）、住宿飯店名稱（Avani Sukhumvit Bangkok Hotel）。</li>
-                        <li><strong>填寫完成後：</strong>系統會產生一組 <strong>QR Code 確認信</strong>（亦會寄至您的 Email），請務必<strong>手機截圖保存或列印出來</strong>，於曼谷機場通關時出示給移民官查驗。</li>
-                        <li><strong>官方網址：</strong><span class="font-mono text-sm break-all text-thai-teal">https://tdac.immigration.go.th/arrival-card/#/home</span></li>
-                    </ul>
-                    <a href="https://tdac.immigration.go.th/arrival-card/#/home" target="_blank" rel="noopener noreferrer" class="no-print w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#0B5345] to-[#117864] hover:from-[#094237] hover:to-[#0E6251] active:scale-[0.99] text-amber-100 font-bold py-3.5 px-4 rounded-xl text-base sm:text-lg shadow-sm border border-amber-400/40 transition">
-                        <i class="fa-solid fa-arrow-up-right-from-square text-amber-300"></i>
-                        <span>前往泰國移民局 TDAC 官方申報網站</span>
-                    </a>
                 </div>
 
                 <!-- 1. 入境海關提醒 -->
@@ -692,56 +696,58 @@
 
             <!-- ================= 分頁 5：LINE 導遊群組 ================= -->
             <section id="tab-line-group" class="tab-content hidden space-y-5">
-                <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
-                    <span class="text-amber-600 text-xl">❖</span>
-                    <span>LINE 導遊聯絡群組</span>
-                </h2>
+                <div class="print-avoid-break space-y-5">
+                    <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
+                        <span class="text-amber-600 text-xl">❖</span>
+                        <span>LINE 導遊聯絡群組</span>
+                    </h2>
 
-                <div class="bg-white rounded-3xl p-6 border border-amber-300/80 shadow-sm text-center space-y-4 print-avoid-break">
-                    <div class="inline-flex items-center gap-2 bg-[#06C755]/10 text-[#06C755] font-bold px-4 py-1.5 rounded-full text-base">
-                        <i class="fa-brands fa-line text-xl"></i>
-                        <span>本團專屬 LINE 群組（含當地導遊）</span>
-                    </div>
+                    <div class="bg-white rounded-3xl p-6 border border-amber-300/80 shadow-sm text-center space-y-4">
+                        <div class="inline-flex items-center gap-2 bg-[#06C755]/10 text-[#06C755] font-bold px-4 py-1.5 rounded-full text-base">
+                            <i class="fa-brands fa-line text-xl"></i>
+                            <span>本團專屬 LINE 群組（含當地導遊）</span>
+                        </div>
 
-                    <h3 class="text-xl sm:text-2xl font-black text-slate-900">一鍵加入導遊聯絡群組</h3>
-                    <p class="text-base sm:text-lg text-slate-600 max-w-md mx-auto leading-relaxed">
-                        出發前與旅遊期間，集合時間、上車地點及當地中文導遊聯繫皆會在此群組統一公告，請每位團員務必加入！
-                    </p>
+                        <h3 class="text-xl sm:text-2xl font-black text-slate-900">一鍵加入導遊聯絡群組</h3>
+                        <p class="text-base sm:text-lg text-slate-600 max-w-md mx-auto leading-relaxed">
+                            出發前與旅遊期間，集合時間、上車地點及當地中文導遊聯繫皆會在此群組統一公告，請每位團員務必加入！
+                        </p>
 
-                    <!-- 一鍵跳轉 LINE 按鈕區 -->
-                    <div class="no-print max-w-xs mx-auto space-y-3 pt-1">
-                        <a id="direct-line-btn" href="https://line.me/ti/g/BKK05261209M" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2.5 bg-[#06C755] hover:bg-[#05b34c] active:scale-[0.98] text-white font-black py-4 px-5 rounded-2xl shadow-lg shadow-[#06C755]/30 transition text-lg">
-                            <i class="fa-brands fa-line text-2xl"></i>
-                            <span>一鍵開啟 LINE 加入群組</span>
-                        </a>
-                        <button onclick="copyLineLink()" class="w-full flex items-center justify-center gap-1.5 bg-thai-cream hover:bg-amber-100 text-slate-800 border border-amber-200 font-bold py-3 px-4 rounded-xl text-base transition">
-                            <i class="fa-regular fa-copy"></i>
-                            <span id="copy-btn-text">複製群組邀請連結</span>
-                        </button>
-                    </div>
+                        <!-- 一鍵跳轉 LINE 按鈕區 -->
+                        <div class="no-print max-w-xs mx-auto space-y-3 pt-1">
+                            <a id="direct-line-btn" href="https://line.me/ti/g/BKK05261209M" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2.5 bg-[#06C755] hover:bg-[#05b34c] active:scale-[0.98] text-white font-black py-4 px-5 rounded-2xl shadow-lg shadow-[#06C755]/30 transition text-lg">
+                                <i class="fa-brands fa-line text-2xl"></i>
+                                <span>一鍵開啟 LINE 加入群組</span>
+                            </a>
+                            <button onclick="copyLineLink()" class="w-full flex items-center justify-center gap-1.5 bg-thai-cream hover:bg-amber-100 text-slate-800 border border-amber-200 font-bold py-3 px-4 rounded-xl text-base transition">
+                                <i class="fa-regular fa-copy"></i>
+                                <span id="copy-btn-text">複製群組邀請連結</span>
+                            </button>
+                        </div>
 
-                    <!-- 備用 QR Code 展示區 -->
-                    <div class="pt-2">
-                        <div class="text-sm sm:text-base text-slate-500 mb-2.5">掃描下方行動條碼加入群組：</div>
-                        <div class="bg-thai-cream p-4 rounded-2xl border-2 border-dashed border-amber-300 inline-block mx-auto">
-                            <div class="relative bg-white p-2.5 rounded-xl shadow-sm inline-block">
-                                <div id="line-qrcode" class="flex items-center justify-center"></div>
-                                <!-- 中央 LINE 徽章 -->
-                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                    <div class="w-10 h-10 bg-white rounded-xl p-1 shadow flex items-center justify-center">
-                                        <div class="w-full h-full bg-[#06C755] rounded-lg flex items-center justify-center text-white font-black text-[10px]">
-                                            LINE
+                        <!-- 備用 QR Code 展示區 -->
+                        <div class="pt-2">
+                            <div class="text-sm sm:text-base text-slate-500 mb-2.5">掃描下方行動條碼加入群組：</div>
+                            <div class="bg-thai-cream p-4 rounded-2xl border-2 border-dashed border-amber-300 inline-block mx-auto">
+                                <div class="relative bg-white p-2.5 rounded-xl shadow-sm inline-block">
+                                    <div id="line-qrcode" class="flex items-center justify-center"></div>
+                                    <!-- 中央 LINE 徽章 -->
+                                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                        <div class="w-10 h-10 bg-white rounded-xl p-1 shadow flex items-center justify-center">
+                                            <div class="w-full h-full bg-[#06C755] rounded-lg flex items-center justify-center text-white font-black text-[10px]">
+                                                LINE
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="pt-1 space-y-2 max-w-md mx-auto">
-                        <div class="bg-thai-goldLight/80 border border-amber-300 rounded-xl p-4 text-left text-base text-amber-950 leading-relaxed">
-                            <div class="font-bold mb-1"><i class="fa-solid fa-circle-info mr-1 text-amber-700"></i> 入群小提醒：</div>
-                            <p>加入群組後，請在記事本或聊天室留言告知您的<strong>「中文姓名」</strong>，方便導遊與服務人員核對名單喔！</p>
+                        <div class="pt-1 space-y-2 max-w-md mx-auto">
+                            <div class="bg-thai-goldLight/80 border border-amber-300 rounded-xl p-4 text-left text-base text-amber-950 leading-relaxed">
+                                <div class="font-bold mb-1"><i class="fa-solid fa-circle-info mr-1 text-amber-700"></i> 入群小提醒：</div>
+                                <p>加入群組後，請在記事本或聊天室留言告知您的<strong>「中文姓名」</strong>，方便導遊與服務人員核對名單喔！</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -852,13 +858,13 @@
                 if (el) el.classList.remove('hidden');
             });
 
-            // 計算目前展開後的實際列印總頁數（以 A4 可印高度約 980px 估算）
+            // 計算目前展開後的實際列印總頁數（配合 16pt 字體以 A4 可印高度約 840px 估算）
             const container = document.querySelector('.brochure-container');
             const paddingBox = document.getElementById('print-padding-pages');
             paddingBox.innerHTML = '';
             paddingBox.classList.remove('hidden');
 
-            const a4PageHeightPx = 980;
+            const a4PageHeightPx = 840;
             const currentHeight = container.scrollHeight;
             const estimatedPages = Math.max(1, Math.ceil(currentHeight / a4PageHeightPx));
             const remainder = estimatedPages % 4;
