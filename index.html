@@ -899,25 +899,17 @@
                             </section>
                         `;
                     } else {
-                        // 中間補頁作為旅遊隨手筆記頁
+                        // 中間補頁作為滿版整頁的旅遊隨手筆記頁（22行填滿A4整頁高度）
+                        const memoLines = Array.from({ length: 22 }, () => '<div class="border-b border-dashed border-slate-300 h-9"></div>').join('');
                         extraHtml += `
-                            <section class="print-page-break pt-4">
-                                <div class="border-2 border-amber-300 rounded-3xl p-6 bg-white space-y-5">
-                                    <h3 class="font-black text-thai-teal flex items-center gap-2 border-b-2 border-amber-300 pb-2">
+                            <section class="print-page-break pt-2" style="height: 262mm; display: flex; flex-direction: column;">
+                                <div class="border-2 border-amber-300 rounded-3xl p-6 bg-white flex-1 flex flex-col justify-between">
+                                    <h3 class="font-black text-thai-teal flex items-center gap-2 border-b-2 border-amber-300 pb-2.5">
                                         <span class="text-amber-600">❖</span>
                                         <span>旅遊隨手筆記 / 購物清單 Memo</span>
                                     </h3>
-                                    <div class="space-y-6 pt-2">
-                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
-                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
-                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
-                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
-                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
-                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
-                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
-                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
-                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
-                                        <div class="border-b border-dashed border-slate-300 h-8"></div>
+                                    <div class="flex-1 flex flex-col justify-between pt-2 pb-1">
+                                        ${memoLines}
                                     </div>
                                 </div>
                             </section>
