@@ -142,6 +142,10 @@
                 break-before: page;
                 page-break-before: always;
             }
+            /* 讓滿版筆記頁在列印時自動顯示 */
+            #print-padding-pages {
+                display: block !important;
+            }
             .print-only-block {
                 display: block !important;
             }
@@ -303,7 +307,7 @@
                 </div>
 
                 <!-- 飯店資訊卡片 -->
-                <div class="print-avoid-break">
+                <div class="print-avoid-break print-page-break">
                     <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2 mb-3.5">
                         <span class="text-amber-600 text-xl">❖</span>
                         <span>全程入住五星級飯店 (四晚連泊免搬行李)</span>
@@ -345,7 +349,7 @@
             </section>
 
             <!-- ================= 分頁 2：每日行程 ================= -->
-            <section id="tab-itinerary" class="tab-content hidden space-y-5">
+            <section id="tab-itinerary" class="tab-content hidden space-y-5 print-page-break">
                 <div class="print-avoid-break space-y-5">
                     <div class="flex items-center justify-between gap-2">
                         <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
@@ -383,7 +387,7 @@
                 </div>
 
                 <!-- Day 2 -->
-                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/70 shadow-sm print-avoid-break">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/70 shadow-sm print-avoid-break print-page-break">
                     <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-amber-200/60">
                         <div class="flex items-center gap-2.5">
                             <span class="bg-gradient-to-r from-[#0B5345] to-[#117864] text-amber-200 border border-amber-400/50 text-base font-black px-3.5 py-1 rounded-lg">DAY 2</span>
@@ -411,7 +415,7 @@
                 </div>
 
                 <!-- Day 3 -->
-                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/70 shadow-sm print-avoid-break">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/70 shadow-sm print-avoid-break print-page-break">
                     <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-amber-200/60">
                         <div class="flex items-center gap-2.5">
                             <span class="bg-gradient-to-r from-[#0B5345] to-[#117864] text-amber-200 border border-amber-400/50 text-base font-black px-3.5 py-1 rounded-lg">DAY 3</span>
@@ -439,7 +443,7 @@
                 </div>
 
                 <!-- Day 4 -->
-                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/70 shadow-sm print-avoid-break">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/70 shadow-sm print-avoid-break print-page-break">
                     <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-amber-200/60">
                         <div class="flex items-center gap-2.5">
                             <span class="bg-gradient-to-r from-[#0B5345] to-[#117864] text-amber-200 border border-amber-400/50 text-base font-black px-3.5 py-1 rounded-lg">DAY 4</span>
@@ -467,7 +471,7 @@
                 </div>
 
                 <!-- Day 5 -->
-                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/70 shadow-sm print-avoid-break">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/70 shadow-sm print-avoid-break print-page-break">
                     <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-amber-200/60">
                         <div class="flex items-center gap-2.5">
                             <span class="bg-gradient-to-r from-[#9B1B30] to-[#B8293D] text-amber-100 border border-amber-300/50 text-base font-black px-3.5 py-1 rounded-lg">DAY 5</span>
@@ -498,7 +502,7 @@
             </section>
 
             <!-- ================= 分頁 3：泰國旅遊注意事項 ================= -->
-            <section id="tab-notices" class="tab-content hidden space-y-4">
+            <section id="tab-notices" class="tab-content hidden space-y-4 print-page-break">
                 <div class="print-avoid-break space-y-4">
                     <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
                         <span class="text-amber-600 text-xl">❖</span>
@@ -563,7 +567,7 @@
                 </div>
 
                 <!-- 3. 行李規定 -->
-                <div class="bg-white rounded-2xl p-4 sm:p-5 border-l-4 border-thai-teal border border-amber-200/80 shadow-sm print-avoid-break">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border-l-4 border-thai-teal border border-amber-200/80 shadow-sm print-avoid-break print-page-break">
                     <div class="flex items-center gap-2.5 mb-3">
                         <span class="text-2xl">🧳</span>
                         <h3 class="font-bold text-lg sm:text-xl text-slate-900">行李重量與安檢規定</h3>
@@ -697,7 +701,7 @@
 
 
             <!-- ================= 分頁 5：LINE 導遊群組 ================= -->
-            <section id="tab-line-group" class="tab-content hidden space-y-5">
+            <section id="tab-line-group" class="tab-content hidden space-y-5 print-page-break">
                 <div class="print-avoid-break space-y-5">
                     <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
                         <span class="text-amber-600 text-xl">❖</span>
@@ -755,49 +759,79 @@
                 </div>
 
                 <!-- 團體旅遊意見調查表 QR Code 卡片 -->
-                <div class="bg-white rounded-3xl p-6 border border-amber-300/80 shadow-sm text-center space-y-3.5 print-avoid-break">
+                <div class="bg-white rounded-3xl p-6 border border-amber-300/80 shadow-sm text-center space-y-3.5 print-avoid-break print-page-break">
                     <div class="inline-flex items-center gap-2 bg-red-50 text-thai-red font-bold px-4 py-1.5 rounded-full text-base border border-red-200">
-                        <i class="fa-solid fa-clipboard-check"></i>
-                        <span>山富旅遊滿意度回饋</span>
-                    </div>
-                    <h3 class="text-xl sm:text-2xl font-black text-slate-900">團體旅遊意見調查表</h3>
-                    <p class="text-base sm:text-lg text-slate-600 max-w-md mx-auto leading-relaxed">
-                        親愛的貴賓，感謝您參加本次曼谷大城五日遊！行程結束前歡迎掃描下方 QR Code 或點擊按鈕留下您的寶貴意見。
-                    </p>
-                    <div class="bg-thai-cream p-4 rounded-2xl border-2 border-dashed border-amber-300 inline-block mx-auto">
-                        <div class="bg-white p-2.5 rounded-xl shadow-sm inline-block">
-                            <div id="survey-qrcode" class="flex items-center justify-center"></div>
+            <!-- ================= 列印專用：固定補齊成 12 頁（4 的倍數） ================= -->
+            <div id="print-padding-pages" class="hidden">
+                <!-- 第 11 頁：滿版整頁旅遊隨手筆記 -->
+                <section class="print-page-break pt-2" style="height: 262mm; display: flex; flex-direction: column;">
+                    <div class="border-2 border-amber-300 rounded-3xl p-6 bg-white flex-1 flex flex-col justify-between">
+                        <h3 class="font-black text-thai-teal flex items-center gap-2 border-b-2 border-amber-300 pb-2.5">
+                            <span class="text-amber-600">❖</span>
+                            <span>旅遊隨手筆記 / 購物清單 Memo</span>
+                        </h3>
+                        <div class="flex-1 flex flex-col justify-between pt-2 pb-1">
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
+                            <div class="border-b border-dashed border-slate-300 h-9"></div>
                         </div>
                     </div>
-                    <div class="no-print max-w-xs mx-auto pt-1">
-                        <a href="https://www.travel4u.com.tw/survey/BKK05261209M" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 bg-thai-red hover:bg-red-800 active:scale-[0.98] text-amber-50 font-bold py-3.5 px-4 rounded-xl text-base sm:text-lg shadow-sm transition">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            <span>一鍵開啟意見調查表</span>
-                        </a>
-                    </div>
-                </div>
+                </section>
 
-                <!-- 緊急聯絡資訊 -->
-                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-300/80 text-base sm:text-lg space-y-2.5 print-avoid-break">
-                    <div class="font-bold text-thai-teal text-lg sm:text-xl mb-1">山富旅遊聯絡資訊</div>
-                    <div class="flex justify-between text-slate-700 gap-2">
-                        <span>小港機場送機人員：楊小姐</span>
-                        <a href="tel:0983215129" class="font-bold text-thai-teal underline shrink-0">0983-215129</a>
+                <!-- 第 12 頁：泰式典雅封底 -->
+                <section class="print-page-break pt-4 space-y-6">
+                    <div class="border-2 border-amber-400 rounded-3xl p-6 bg-thai-cream space-y-4">
+                        <h3 class="font-black text-thai-teal flex items-center gap-2">
+                            <span class="text-amber-600">❖</span>
+                            <span>泰國必買伴手禮與隨手記帳欄</span>
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3 text-slate-700">
+                            <div>□ 手標泰式奶茶 / 椰子脆片</div>
+                            <div>□ 皇家蜂蜜 / 牛奶片 / 小老闆海苔</div>
+                            <div>□ 曼谷包 NaRaYa / 大象文創包</div>
+                            <div>□ 薄荷吸鼻劑 / 青草膏 / 足貼</div>
+                        </div>
+                        <div class="space-y-4 pt-3">
+                            <div class="border-b border-dashed border-amber-400 h-8"></div>
+                            <div class="border-b border-dashed border-amber-400 h-8"></div>
+                            <div class="border-b border-dashed border-amber-400 h-8"></div>
+                            <div class="border-b border-dashed border-amber-400 h-8"></div>
+                            <div class="border-b border-dashed border-amber-400 h-8"></div>
+                            <div class="border-b border-dashed border-amber-400 h-8"></div>
+                        </div>
                     </div>
-                    <div class="flex justify-between text-slate-700 gap-2">
-                        <span>客服人員：蔡明洹 小姐</span>
-                        <a href="tel:0911799023" class="font-bold text-thai-teal underline shrink-0">0911-799023</a>
+                    <div class="bg-[#0B5345] text-white rounded-3xl p-8 text-center space-y-3 border-2 border-amber-400">
+                        <div class="text-amber-300 text-3xl"><i class="fa-solid fa-gopuram"></i></div>
+                        <div class="font-black text-amber-200 tracking-widest">SAWADEE THAILAND</div>
+                        <div class="font-bold">山富國際旅行社股份有限公司</div>
+                        <div class="text-amber-100/90">團體編號：BKK05261209M ｜ 感謝您的參與，祝您旅途平安順心！</div>
                     </div>
-                </div>
-            </section>
-
-            <!-- ================= 列印專用：自動補齊 4 的倍數頁數（旅遊隨手筆記與封底） ================= -->
-            <div id="print-padding-pages" class="hidden"></div>
+                </section>
+            </div>
 
         </main>
 
-        <!-- 底部手冊頁尾 -->
-        <footer class="px-6 py-4 bg-thai-silk border-t border-amber-300/70 text-center text-sm sm:text-base text-amber-950/80 font-medium">
+        <!-- 底部手冊頁尾（僅在螢幕瀏覽顯示，避免列印時多佔第 13 頁） -->
+        <footer class="no-print px-6 py-4 bg-thai-silk border-t border-amber-300/70 text-center text-sm sm:text-base text-amber-950/80 font-medium">
             山富國際旅行社股份有限公司 ｜ 祝您旅途愉快 Sawasdee Ka!
         </footer>
     </div>
@@ -918,20 +952,20 @@
                                     </h3>
                                     <div class="flex-1 flex flex-col justify-between pt-2 pb-1">
                                         ${memoLines}
-                                    </div>
-                                </div>
-                            </section>
-                        `;
-                    }
-                }
-                paddingBox.innerHTML = extraHtml;
-            }
+        // 專屬列印函式：展開所有非匯率分頁，精準輸出為 12 頁（4 的倍數）
+        function printBrochure() {
+            const activeBtn = document.querySelector('.tab-btn.active');
+            const currentTabId = activeBtn ? activeBtn.id.replace('btn-', '') : 'flight-hotel';
+            const printTabs = ['flight-hotel', 'itinerary', 'notices', 'line-group'];
+
+            printTabs.forEach(id => {
+                const el = document.getElementById('tab-' + id);
+                if (el) el.classList.remove('hidden');
+            });
 
             window.print();
 
             setTimeout(() => {
-                paddingBox.innerHTML = '';
-                paddingBox.classList.add('hidden');
                 switchTab(currentTabId);
             }, 300);
         }
