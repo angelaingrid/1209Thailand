@@ -793,6 +793,54 @@
             山富國際旅行社股份有限公司 ｜ 祝您旅途愉快 Sawasdee Ka!
         </footer>
     </div>
+
+    <!-- 固定在畫面下方的泰式金邊分頁導覽列 -->
+    <nav class="no-print fixed bottom-0 left-0 right-0 z-50 bg-[#0B3B32]/95 backdrop-blur-md border-t-2 border-amber-400/80 shadow-[0_-8px_24px_-4px_rgba(11,59,50,0.35)]">
+        <div class="max-w-2xl mx-auto grid grid-cols-5">
+            <button onclick="switchTab('flight-hotel')" id="btn-flight-hotel" class="tab-btn active flex flex-col items-center justify-center py-2.5 px-1 text-xs sm:text-sm font-bold text-amber-300 border-t-4 border-amber-400 bg-white/10 transition">
+                <i class="fa-solid fa-plane-departure text-lg sm:text-xl mb-1"></i>
+                <span>航班飯店</span>
+            </button>
+            <button onclick="switchTab('itinerary')" id="btn-itinerary" class="tab-btn flex flex-col items-center justify-center py-2.5 px-1 text-xs sm:text-sm font-bold text-amber-100/75 hover:text-amber-200 border-t-4 border-transparent transition">
+                <i class="fa-solid fa-map-location-dot text-lg sm:text-xl mb-1"></i>
+                <span>每日行程</span>
+            </button>
+            <button onclick="switchTab('notices')" id="btn-notices" class="tab-btn flex flex-col items-center justify-center py-2.5 px-1 text-xs sm:text-sm font-bold text-amber-100/75 hover:text-amber-200 border-t-4 border-transparent transition">
+                <i class="fa-solid fa-circle-exclamation text-lg sm:text-xl mb-1"></i>
+                <span>注意事項</span>
+            </button>
+            <button onclick="switchTab('currency')" id="btn-currency" class="tab-btn flex flex-col items-center justify-center py-2.5 px-1 text-xs sm:text-sm font-bold text-amber-100/75 hover:text-amber-200 border-t-4 border-transparent transition">
+                <i class="fa-solid fa-coins text-lg sm:text-xl mb-1"></i>
+                <span>匯率換算</span>
+            </button>
+            <button onclick="switchTab('line-group')" id="btn-line-group" class="tab-btn flex flex-col items-center justify-center py-2.5 px-1 text-xs sm:text-sm font-bold text-amber-100/75 hover:text-amber-200 border-t-4 border-transparent transition">
+                <i class="fa-brands fa-line text-lg sm:text-xl mb-1 text-[#06C755]"></i>
+                <span>導遊群組</span>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        // 分頁切換邏輯
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'text-amber-300', 'border-amber-400', 'bg-white/10');
+                btn.classList.add('text-amber-100/75', 'border-transparent');
+            });
+
+            const targetContent = document.getElementById('tab-' + tabId);
+            const targetBtn = document.getElementById('btn-' + tabId);
+            if (targetContent) targetContent.classList.remove('hidden');
+            if (targetBtn) {
+                targetBtn.classList.add('active', 'text-amber-300', 'border-amber-400', 'bg-white/10');
+                targetBtn.classList.remove('text-amber-100/75', 'border-transparent');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         // 專屬列印函式：列印前主動展開所有非匯率分頁，並自動計算並補齊成 4 的倍數頁數（方便小冊子裝訂）
         function printBrochure() {
             const activeBtn = document.querySelector('.tab-btn.active');
