@@ -10,8 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <!-- 引入 FontAwesome 圖示庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- 引入 QRCode.js 用於生成乾淨的QR Code -->
+    <!-- 引入 QRCode.js 用於生成乾淨的QR Code，以及 jsQR 用於解析上傳的真實 QR Code 圖片 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
     
     <script>
         tailwind.config = {
@@ -728,7 +729,7 @@
 
                     <!-- 手機直接點擊加入按鈕 -->
                     <div class="pt-1 space-y-2.5">
-                        <a href="https://line.me/ti/g/BKK05261209M" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#06C755] hover:bg-[#05b34c] text-white font-black py-4 px-5 rounded-2xl transition shadow-md text-lg">
+                        <a id="line-join-btn" href="https://line.me/ti/g/BKK05261209M" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#06C755] hover:bg-[#05b34c] text-white font-black py-4 px-5 rounded-2xl transition shadow-md text-lg">
                             <i class="fa-brands fa-line text-2xl"></i> 手機直接點此加入 LINE 群組
                         </a>
                         <button onclick="copyGroupLink()" class="w-full flex items-center justify-center gap-2 bg-thai-cream hover:bg-amber-100 text-slate-700 font-bold py-3 px-4 rounded-xl border border-amber-300 transition text-sm sm:text-base">
@@ -754,10 +755,13 @@
                         </div>
                     </div>
 
-                    <div class="pt-1">
-                        <a href="https://www.travel4u.com.tw/survey/BKK05261209M" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#0B5345] to-[#117864] hover:from-[#072E26] hover:to-[#0B5345] text-amber-100 font-black py-3.5 px-5 rounded-2xl border border-amber-400/50 transition shadow-sm text-base">
+                    <div class="pt-1 space-y-2.5">
+                        <a id="survey-link-btn" href="https://richmond.surveycake.biz/s/r1GAd?ssn2=BKK05261209M&ssn48=None" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#0B5345] to-[#117864] hover:from-[#072E26] hover:to-[#0B5345] text-amber-100 font-black py-3.5 px-5 rounded-2xl border border-amber-400/50 transition shadow-sm text-base">
                             <i class="fa-solid fa-pen-to-square text-amber-300"></i> 手機直接點此填寫意見調查表
                         </a>
+                        <button onclick="copySurveyLink()" class="w-full flex items-center justify-center gap-2 bg-thai-cream hover:bg-amber-100 text-slate-700 font-bold py-2.5 px-4 rounded-xl border border-amber-300 transition text-sm sm:text-base">
+                            <i class="fa-regular fa-copy"></i> <span>複製意見調查表連結</span>
+                        </button>
                     </div>
                 </div>
 
@@ -928,13 +932,16 @@
         }
 
         // ================= 3. LINE 群組與意見調查表 QR Code 生成與複製連結 =================
+        const LINE_GROUP_URL = "https://line.me/ti/g/BKK05261209M";
+        const SURVEY_URL = "https://richmond.surveycake.biz/s/r1GAd?ssn2=BKK05261209M&ssn48=None";
+
         function initQRCodes() {
             // 1. LINE 群組 QR Code
             const lineQrContainer = document.getElementById('line-qrcode');
             if (lineQrContainer && typeof QRCode !== 'undefined') {
                 lineQrContainer.innerHTML = '';
                 new QRCode(lineQrContainer, {
-                    text: "https://line.me/ti/g/BKK05261209M",
+                    text: LINE_GROUP_URL,
                     width: 185,
                     height: 185,
                     colorDark : "#0f172a",
@@ -948,7 +955,7 @@
             if (surveyQrContainer && typeof QRCode !== 'undefined') {
                 surveyQrContainer.innerHTML = '';
                 new QRCode(surveyQrContainer, {
-                    text: "https://www.travel4u.com.tw/survey/BKK05261209M",
+                    text: SURVEY_URL,
                     width: 185,
                     height: 185,
                     colorDark : "#0f172a",
@@ -958,20 +965,31 @@
             }
         }
 
-        function copyGroupLink() {
-            const linkText = "https://line.me/ti/g/BKK05261209M";
-            const tempInput = document.createElement("input");
-            tempInput.value = linkText;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-
+        function showToast(message) {
             const toast = document.getElementById('toast-msg');
+            toast.textContent = message;
             toast.style.opacity = '1';
             setTimeout(() => {
                 toast.style.opacity = '0';
             }, 2200);
+        }
+
+        function copyTextToClipboard(text, toastMessage) {
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            showToast(toastMessage);
+        }
+
+        function copyGroupLink() {
+            copyTextToClipboard(LINE_GROUP_URL, "已複製群組邀請連結！");
+        }
+
+        function copySurveyLink() {
+            copyTextToClipboard(SURVEY_URL, "已複製意見調查表連結！");
         }
 
         // ================= 4. 一鍵列印手冊 (自動展開分頁並排除匯率) =================
