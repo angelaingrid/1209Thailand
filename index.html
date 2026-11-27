@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>曼谷大城５日｜歐式水上市集×美功鐵道×大城古都風情 - 紙本列印版手冊</title>
+    <title>曼谷大城５日｜歐式水上市集×美功鐵道×大城古都風情 - 旅遊電子手冊</title>
     <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 Google Fonts (Noto Sans TC 與 Inter) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <!-- 引入 FontAwesome 圖示庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- 引入 QRCode.js 生成清晰 QR Code -->
+    <!-- 引入 QRCode.js 用於生成乾淨的QR Code -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <script>
@@ -23,12 +23,14 @@
                     colors: {
                         thai: {
                             gold: '#C59B27',
+                            goldBright: '#E5B842',
                             goldLight: '#F9F1D8',
+                            navy: '#14242B',
                             teal: '#0B5345',
                             emerald: '#117864',
                             cream: '#FDF9F0',
                             silk: '#F6EEDB',
-                            red: '#9B1B30'
+                            red: '#9B1B30' // 泰式宮廷紅
                         }
                     }
                 }
@@ -36,11 +38,37 @@
         }
     </script>
     <style>
+        /* 泰式暖金背景與古典花紋質感 */
         body {
             background-color: #EFE6D5;
-            color: #1e293b;
+            background-image: radial-gradient(rgba(197, 155, 39, 0.14) 1px, transparent 1px),
+                              radial-gradient(rgba(11, 83, 69, 0.08) 1px, #EFE6D5 1px);
+            background-size: 28px 28px;
+            background-position: 0 0, 14px 14px;
+            -webkit-tap-highlight-color: transparent;
         }
-        /* 泰式織錦彩帶分隔線 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .tab-content {
+            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* 手冊書頁質感陰影與泰式金邊 */
+        .brochure-shadow {
+            box-shadow: 0 14px 38px -6px rgba(45, 32, 12, 0.18), 0 4px 14px -2px rgba(197, 155, 39, 0.12);
+        }
+        /* 泰式古典幾何飾邊 (Thai Kanok / Diamond Lattice) */
+        .thai-lattice-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 20L20 40L0 20L20 0zm0 6L6 20l14 14 14-14L20 6zm0 6l8 8-8 8-8-8 8-8z' fill='%23E5B842' fill-opacity='0.09' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
         .thai-gold-divider {
             height: 6px;
             background: repeating-linear-gradient(
@@ -54,353 +82,645 @@
                 #E5B842 36px,
                 #E5B842 48px
             );
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
-
-        /* 專屬列印樣式設定 */
-        @media print {
-            @page {
-                size: A4 portrait;
-                margin: 0;
-            }
-            body {
-                background-color: #ffffff !important;
-                margin: 0;
-                padding: 12mm !important;
-                font-size: 10.5pt;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            .no-print {
-                display: none !important;
-            }
-            .print-container {
-                max-width: 100% !important;
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                box-shadow: none !important;
-                border: none !important;
-                background-color: #ffffff !important;
-            }
-            /* 避免單張卡片在換頁時被從中間切斷 */
-            .avoid-break {
-                break-inside: avoid;
-                page-break-inside: avoid;
-            }
-            /* 強制分頁標籤（可依需求調整） */
-            .page-break-before {
-                break-before: page;
-                page-break-before: always;
-            }
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="text-slate-800 antialiased selection:bg-amber-200 selection:text-slate-900">
 
-    <!-- 頂部浮動列印工具列（列印時自動隱藏） -->
-    <div class="no-print sticky top-0 z-50 bg-[#072E26] text-white px-4 py-3 shadow-lg border-b-2 border-amber-400">
-        <div class="max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5 text-sm sm:text-base">
-                <i class="fa-solid fa-print text-amber-400 text-lg"></i>
-                <span class="font-bold">紙本列印專用版（已移除匯率換算機，全頁展開排版）</span>
-            </div>
-            <button onclick="window.print()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black px-5 py-2 rounded-full text-sm sm:text-base shadow transition flex items-center gap-2 cursor-pointer">
-                <i class="fa-solid fa-file-pdf"></i>
-                <span>立即列印 / 另存 PDF</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- A4 紙本主容器 -->
-    <div class="print-container max-w-4xl mx-auto my-6 bg-white shadow-xl border border-amber-300 sm:rounded-2xl overflow-hidden">
+    <!-- 主容器：泰式絲綢象牙白搭配暹羅金鑲邊 -->
+    <div class="brochure-container max-w-2xl mx-auto min-h-screen bg-thai-cream brochure-shadow flex flex-col relative pb-28 sm:pb-28 sm:my-6 sm:rounded-3xl overflow-hidden border-2 border-amber-400/50">
         
-        <!-- ================= 封面標頭 ================= -->
-        <header class="bg-[#0B5345] text-white p-6 sm:p-7 avoid-break">
-            <div class="flex flex-wrap justify-between items-start gap-4">
+        <!-- 頂部封面視覺 Header：暹羅皇室孔雀綠與金箔漸層 -->
+        <header class="relative bg-gradient-to-br from-[#072E26] via-[#0E4D40] to-[#1A2A27] thai-lattice-bg text-white pt-7 pb-6 px-6 overflow-hidden">
+            <!-- 裝飾性背景光暈與泰式神廟剪影 -->
+            <div class="absolute -right-8 -top-8 w-52 h-52 rounded-full bg-amber-400/15 blur-2xl pointer-events-none"></div>
+            <div class="absolute -left-10 bottom-0 w-40 h-40 rounded-full bg-emerald-400/10 blur-xl pointer-events-none"></div>
+            <div class="absolute right-3 bottom-14 text-amber-300/10 text-8xl pointer-events-none select-none">
+                <i class="fa-solid fa-gopuram"></i>
+            </div>
+            
+            <div class="relative z-10 flex justify-between items-start gap-3">
                 <div>
-                    <div class="inline-block px-3 py-0.5 rounded-full bg-amber-400/20 border border-amber-300/50 text-xs font-bold text-amber-300 mb-2">
-                        山富旅遊 RICHMOND TOURS ｜ 行前說明手冊
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-950/50 backdrop-blur-sm border border-amber-400/40 text-sm sm:text-base font-bold text-amber-300 mb-2.5 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        <span>山富旅遊 RICHMOND TOURS</span>
                     </div>
-                    <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white leading-snug">
-                        曼谷大城５日｜歐式水上市集×美功鐵道×大城古都風情
+                    <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-amber-50 leading-snug drop-shadow-sm">
+                        <span>曼谷大城５日｜歐式水上市集×美功鐵道×大城古都風情</span>
+                        <span class="text-amber-400 inline-block ml-1"><i class="fa-solid fa-gopuram"></i></span>
                     </h1>
-                    <p class="text-amber-200 text-sm sm:text-base mt-1.5 font-medium">
-                        <i class="fa-regular fa-calendar mr-1.5"></i>出發日期：2026/12/09 (三) – 2026/12/13 (日)
+                    <p class="text-amber-100/90 text-base sm:text-lg mt-2 flex items-center gap-2 font-medium">
+                        <span><i class="fa-regular fa-calendar mr-1.5 text-amber-400"></i>2026/12/09 (三) – 12/13 (日)</span>
+                        <span class="text-amber-400/60">✦</span>
+                        <span class="text-amber-300 text-sm sm:text-base">Sawasdee Thailand</span>
                     </p>
                 </div>
-                <div class="bg-black/25 px-4 py-2.5 rounded-xl border border-amber-400/40 text-right shrink-0">
-                    <div class="text-xs text-amber-200">團體編號</div>
-                    <div class="text-lg font-black text-amber-300 font-mono">BKK05261209M</div>
+                <div class="text-right shrink-0 bg-gradient-to-b from-amber-500/20 to-amber-900/30 backdrop-blur-md px-3.5 py-2 rounded-xl border border-amber-400/40 shadow-inner">
+                    <div class="text-xs sm:text-sm text-amber-200/80 uppercase tracking-wider">團體編號</div>
+                    <div class="text-base sm:text-lg font-bold text-amber-300 font-mono">BKK05261209M</div>
                 </div>
             </div>
 
-            <!-- 集合重點條 -->
-            <div class="mt-4 pt-3.5 border-t border-amber-300/30 flex flex-wrap justify-between items-center gap-3 text-sm sm:text-base">
-                <div>
-                    <span class="text-amber-300 font-bold">【機場集合】</span>
-                    <span>2026/12/09 中午 12:00 ｜ 高雄小港機場 中華航空櫃台（無行李牌）</span>
+            <!-- 集合重點快訊條：泰式絲綢金箔框 -->
+            <div class="relative z-10 mt-5 bg-gradient-to-r from-amber-500/20 via-amber-400/15 to-amber-500/20 backdrop-blur-md rounded-2xl p-4 border border-amber-300/40 flex flex-wrap items-center justify-between gap-2 text-sm sm:text-base shadow-sm">
+                <div class="flex items-center gap-2.5">
+                    <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black px-2.5 py-1 rounded-md text-xs sm:text-sm shadow-sm">機場集合</span>
+                    <span class="font-medium text-amber-50">12/09 12:00 高雄小港機場 華航櫃台</span>
                 </div>
-                <div>
-                    <span class="text-amber-300 font-bold">【送機人員】</span>
-                    <span>楊小姐 0983-215129</span>
+                <div class="text-amber-200 font-semibold">
+                    <i class="fa-solid fa-user-tie mr-1 text-amber-400"></i>送機：楊小姐 0983-215129
                 </div>
             </div>
         </header>
 
+        <!-- 泰式織錦彩帶分隔線 -->
         <div class="thai-gold-divider w-full"></div>
 
-        <!-- 內容主體 -->
-        <main class="p-6 sm:p-8 space-y-6">
+        <!-- 主內容動態顯示區 -->
+        <main class="flex-1 p-5 sm:p-6 space-y-5">
 
-            <!-- ================= 第一部分：航班與飯店資訊 ================= -->
-            <section class="avoid-break space-y-3">
-                <h2 class="text-lg font-black text-thai-teal border-b-2 border-amber-400 pb-1.5 flex items-center gap-2">
-                    <span class="text-amber-600">❖</span>
-                    <span>一、航班資訊（中華航空 China Airlines）與住宿飯店</span>
-                </h2>
-
-                <!-- 航班表格 -->
-                <div class="overflow-hidden rounded-xl border border-amber-300">
-                    <table class="w-full text-left border-collapse text-sm">
-                        <thead>
-                            <tr class="bg-thai-goldLight text-amber-950 font-bold border-b border-amber-300">
-                                <th class="py-2.5 px-3">航段</th>
-                                <th class="py-2.5 px-3">日期</th>
-                                <th class="py-2.5 px-3">航班編號</th>
-                                <th class="py-2.5 px-3">出發機場 / 時間</th>
-                                <th class="py-2.5 px-3">抵達機場 / 時間</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-amber-200">
-                            <tr>
-                                <td class="py-2.5 px-3 font-bold text-thai-teal">去程</td>
-                                <td class="py-2.5 px-3 font-medium">2026/12/09 (三)</td>
-                                <td class="py-2.5 px-3 font-black text-thai-red">中華航空 CI839</td>
-                                <td class="py-2.5 px-3">高雄小港機場 <strong>14:45</strong></td>
-                                <td class="py-2.5 px-3">曼谷素萬那普 <strong>17:35</strong></td>
-                            </tr>
-                            <tr>
-                                <td class="py-2.5 px-3 font-bold text-amber-800">回程</td>
-                                <td class="py-2.5 px-3 font-medium">2026/12/13 (日)</td>
-                                <td class="py-2.5 px-3 font-black text-thai-red">中華航空 CI840</td>
-                                <td class="py-2.5 px-3">曼谷素萬那普 <strong>18:35</strong></td>
-                                <td class="py-2.5 px-3">高雄小港機場 <strong>22:55</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <!-- ================= 分頁 1：航班與飯店 ================= -->
+            <section id="tab-flight-hotel" class="tab-content space-y-5">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
+                        <span class="text-amber-600 text-2xl">❖</span>
+                        <span>航班與五星住宿資訊</span>
+                    </h2>
+                    <span class="text-sm font-bold text-amber-900 bg-amber-200/70 border border-amber-400/50 px-3 py-1 rounded-full">中華航空直飛</span>
                 </div>
 
-                <!-- 飯店資訊框 -->
-                <div class="bg-thai-cream rounded-xl p-4 border border-amber-300 text-sm space-y-1.5">
-                    <div class="flex flex-wrap items-center justify-between gap-2">
-                        <div class="font-black text-base text-thai-teal">
-                            <i class="fa-solid fa-hotel text-amber-600 mr-1.5"></i>全程四晚連泊五星飯店：Avani Sukhumvit Bangkok Hotel（曼谷素坤逸安凡尼飯店）
-                        </div>
-                        <span class="text-xs font-bold bg-amber-200/80 text-amber-950 px-2.5 py-0.5 rounded">免搬行李</span>
+                <!-- 航班資訊卡片 -->
+                <div class="bg-white rounded-2xl border border-amber-300/70 shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-thai-goldLight to-amber-50 px-4 py-3 border-b border-amber-200/80 flex items-center justify-between">
+                        <span class="text-base font-bold text-amber-950 flex items-center gap-2">
+                            <i class="fa-solid fa-plane-departure text-thai-red"></i> 參考航班時間 (China Airlines)
+                        </span>
+                        <span class="text-sm text-amber-800 font-semibold">行李託運 23kg / 手提 7kg</span>
                     </div>
-                    <p class="text-slate-700 leading-relaxed">
-                        • <strong>交通機能：</strong>直通 BTS On Nut (安努站) 空橋，樓下即是 Century The Movie Plaza 商場，對面有 Lotus's 大型超市與平價按摩街。<br>
-                        • <strong>環保備品：</strong>響應綠色環保旅遊，部分飯店僅提供洗髮精、肥皂、浴巾與毛巾，<strong>建議自備牙膏、牙刷、拖鞋、梳子</strong>等個人盥洗用品。
-                    </p>
+                    
+                    <div class="divide-y divide-amber-100">
+                        <!-- 去程 -->
+                        <div class="p-4 sm:p-5">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="inline-flex items-center gap-1.5 text-sm font-bold px-3 py-1 rounded-full bg-thai-teal text-amber-100 shadow-xs">
+                                    去程 2026/12/09 (三)
+                                </span>
+                                <span class="font-mono font-black text-thai-red text-base sm:text-lg">中華航空 CI839</span>
+                            </div>
+                            <div class="grid grid-cols-3 items-center text-center">
+                                <div class="text-left">
+                                    <div class="text-2xl sm:text-3xl font-black text-slate-900">14:45</div>
+                                    <div class="text-sm sm:text-base font-bold text-slate-700 mt-0.5">高雄小港機場</div>
+                                    <div class="text-xs sm:text-sm text-slate-400">KHH 國際航廈</div>
+                                </div>
+                                <div class="flex flex-col items-center px-2">
+                                    <span class="text-xs sm:text-sm text-amber-700 font-semibold mb-1">直飛航程</span>
+                                    <div class="w-full flex items-center gap-1 text-amber-500">
+                                        <span class="h-[2px] flex-1 bg-amber-300"></span>
+                                        <i class="fa-solid fa-plane text-base text-thai-teal"></i>
+                                        <span class="h-[2px] flex-1 bg-amber-300"></span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl sm:text-3xl font-black text-thai-teal">17:35</div>
+                                    <div class="text-sm sm:text-base font-bold text-slate-700 mt-0.5">曼谷素萬那普</div>
+                                    <div class="text-xs sm:text-sm text-slate-400">BKK 國際機場</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 回程 -->
+                        <div class="p-4 sm:p-5 bg-amber-50/30">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="inline-flex items-center gap-1.5 text-sm font-bold px-3 py-1 rounded-full bg-amber-600 text-white shadow-xs">
+                                    回程 2026/12/13 (日)
+                                </span>
+                                <span class="font-mono font-black text-thai-red text-base sm:text-lg">中華航空 CI840</span>
+                            </div>
+                            <div class="grid grid-cols-3 items-center text-center">
+                                <div class="text-left">
+                                    <div class="text-2xl sm:text-3xl font-black text-slate-900">18:35</div>
+                                    <div class="text-sm sm:text-base font-bold text-slate-700 mt-0.5">曼谷素萬那普</div>
+                                    <div class="text-xs sm:text-sm text-slate-400">BKK 國際機場</div>
+                                </div>
+                                <div class="flex flex-col items-center px-2">
+                                    <span class="text-xs sm:text-sm text-amber-700 font-semibold mb-1">直飛航程</span>
+                                    <div class="w-full flex items-center gap-1 text-amber-500">
+                                        <span class="h-[2px] flex-1 bg-amber-300"></span>
+                                        <i class="fa-solid fa-plane text-base text-amber-600"></i>
+                                        <span class="h-[2px] flex-1 bg-amber-300"></span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl sm:text-3xl font-black text-thai-teal">22:55</div>
+                                    <div class="text-sm sm:text-base font-bold text-slate-700 mt-0.5">高雄小港機場</div>
+                                    <div class="text-xs sm:text-sm text-slate-400">KHH 國際航廈</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 集合須知卡片 -->
+                <div class="bg-gradient-to-br from-thai-goldLight to-amber-50 rounded-2xl p-4 sm:p-5 border border-amber-300 space-y-2.5 shadow-xs">
+                    <h3 class="text-base sm:text-lg font-bold text-amber-950 flex items-center gap-2">
+                        <i class="fa-solid fa-bell text-amber-600"></i> 機場集合與報到須知
+                    </h3>
+                    <ul class="text-sm sm:text-base text-amber-950/90 space-y-2 list-disc pl-5 leading-relaxed">
+                        <li><strong>集合時間地點：</strong>2026/12/09 中午 <strong>12:00</strong> 於高雄小港機場中華航空團體櫃台前集合（無行李牌）。</li>
+                        <li><strong>送機服務：</strong>當日由送機人員 <strong>楊小姐 (0983-215129)</strong> 協助辦理登機手續，抵達曼谷機場後由當地中文導遊接機。</li>
+                        <li><strong>護照效期：</strong>請務必確認護照效期自返國日起算須有 <strong>6 個月以上</strong>。</li>
+                    </ul>
+                </div>
+
+                <!-- 住宿飯店資訊卡片 -->
+                <div class="bg-white rounded-2xl border border-amber-300/70 shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-[#0B5345] to-[#117864] px-4 py-3 text-white flex items-center justify-between border-b-2 border-amber-400">
+                        <span class="text-base font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-hotel text-amber-300"></i> 全程四晚連泊五星飯店
+                        </span>
+                        <span class="text-xs sm:text-sm bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded font-black">免搬行李</span>
+                    </div>
+
+                    <div class="p-4 sm:p-5 space-y-3.5">
+                        <div>
+                            <div class="text-xs sm:text-sm font-bold text-amber-700 uppercase tracking-wider">Day 1 – Day 4 連泊</div>
+                            <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">Avani Sukhumvit Bangkok Hotel</h3>
+                            <p class="text-base text-slate-600 font-medium">曼谷素坤逸安凡尼飯店（或同級五星級飯店）</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm sm:text-base">
+                            <div class="bg-thai-cream p-3.5 rounded-xl border border-amber-200/80">
+                                <div class="font-bold text-thai-teal mb-1"><i class="fa-solid fa-train-subway mr-1.5 text-amber-600"></i>絕佳交通機能</div>
+                                <p class="text-slate-600 leading-relaxed">飯店直通 BTS On Nut (安努站) 空橋，樓下即是 Century The Movie Plaza 商場，對面有 Lotus's 大型超市與平價按摩街。</p>
+                            </div>
+                            <div class="bg-thai-cream p-3.5 rounded-xl border border-amber-200/80">
+                                <div class="font-bold text-thai-teal mb-1"><i class="fa-solid fa-leaf mr-1.5 text-emerald-600"></i>環保備品提醒</div>
+                                <p class="text-slate-600 leading-relaxed">響應綠色環保旅遊，部分飯店僅提供洗髮精、肥皂、浴巾與毛巾，<strong>建議自備牙膏、牙刷、拖鞋、梳子</strong>等個人盥洗用品。</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-1 flex flex-wrap gap-2">
+                            <a href="https://maps.google.com/?q=Avani+Sukhumvit+Bangkok+Hotel" target="_blank" class="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-thai-teal bg-amber-50 hover:bg-amber-100 px-4 py-2 rounded-xl border border-amber-300 transition">
+                                <i class="fa-solid fa-location-dot text-thai-red"></i> Google 地圖導航
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- ================= 第二部分：五日每日行程 ================= -->
-            <section class="space-y-3">
-                <h2 class="text-lg font-black text-thai-teal border-b-2 border-amber-400 pb-1.5 flex items-center justify-between">
-                    <span><span class="text-amber-600 mr-1.5">❖</span>二、五日精選行程與餐食安排</span>
-                    <span class="text-xs font-bold text-amber-900 bg-amber-100 px-2.5 py-0.5 rounded border border-amber-300">全程無購物站壓力</span>
-                </h2>
+            <!-- ================= 分頁 2：每日行程 ================= -->
+            <section id="tab-itinerary" class="tab-content hidden space-y-5">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
+                        <span class="text-amber-600 text-2xl">❖</span>
+                        <span>五日精選行程表</span>
+                    </h2>
+                    <span class="text-sm font-bold text-amber-900 bg-amber-200/70 border border-amber-400/50 px-3 py-1 rounded-full">全程無購物站壓力</span>
+                </div>
+
+                <!-- 快速跳轉天數按鈕 -->
+                <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                    <a href="#day-1" class="shrink-0 px-3.5 py-2 rounded-full bg-white border border-amber-300 text-sm sm:text-base font-bold text-thai-teal hover:bg-thai-teal hover:text-amber-100 transition shadow-2xs">Day 1 夜市</a>
+                    <a href="#day-2" class="shrink-0 px-3.5 py-2 rounded-full bg-white border border-amber-300 text-sm sm:text-base font-bold text-thai-teal hover:bg-thai-teal hover:text-amber-100 transition shadow-2xs">Day 2 皇宮遊船</a>
+                    <a href="#day-3" class="shrink-0 px-3.5 py-2 rounded-full bg-white border border-amber-300 text-sm sm:text-base font-bold text-thai-teal hover:bg-thai-teal hover:text-amber-100 transition shadow-2xs">Day 3 大城泰服</a>
+                    <a href="#day-4" class="shrink-0 px-3.5 py-2 rounded-full bg-white border border-amber-300 text-sm sm:text-base font-bold text-thai-teal hover:bg-thai-teal hover:text-amber-100 transition shadow-2xs">Day 4 水上市場</a>
+                    <a href="#day-5" class="shrink-0 px-3.5 py-2 rounded-full bg-white border border-amber-300 text-sm sm:text-base font-bold text-thai-teal hover:bg-thai-teal hover:text-amber-100 transition shadow-2xs">Day 5 洽圖洽</a>
+                </div>
 
                 <!-- Day 1 -->
-                <div class="avoid-break border border-amber-300 rounded-xl p-3.5 bg-white">
-                    <div class="flex items-center justify-between border-b border-amber-200 pb-1.5 mb-2">
-                        <div class="font-black text-base text-thai-teal">
-                            <span class="bg-thai-teal text-white text-xs px-2 py-0.5 rounded mr-2">DAY 1</span>
-                            2026/12/09 (三) 高雄小港機場 → 曼谷素萬那普機場 → 最接地氣 Save One Go 夜市
+                <article id="day-1" class="bg-white rounded-2xl border border-amber-300/70 shadow-sm overflow-hidden scroll-mt-4">
+                    <div class="bg-gradient-to-r from-[#0B5345] to-[#117864] px-4 py-3 text-white flex items-center justify-between border-b-2 border-amber-400">
+                        <div class="flex items-center gap-2.5">
+                            <span class="bg-amber-400 text-slate-950 font-black text-sm px-2.5 py-0.5 rounded shadow-2xs">DAY 1</span>
+                            <span class="font-bold text-base">2026/12/09 (三)</span>
+                        </div>
+                        <span class="text-sm text-amber-200 font-medium">抵達曼谷・在地夜生活</span>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3.5">
+                        <h3 class="text-lg sm:text-xl font-black text-slate-900 leading-snug">
+                            高雄小港機場 → 曼谷素萬那普機場 → 最接地氣 Save One Go 夜市
+                        </h3>
+                        <p class="text-base text-slate-600 leading-relaxed">
+                            今日於高雄小港機場集合搭乘中華航空直飛天使之城曼谷。抵達後專車前往曼谷近年超人氣的在地人夜市 <strong>Save One Go Market</strong>，這裡匯集了道地泰式平價小吃、炭烤海鮮、泰式奶茶與潮流服飾，物價親民、氛圍輕鬆，是第一晚體驗曼谷夜生活與大啖美食的最佳去處！
+                        </p>
+                        <!-- 餐食與住宿列 -->
+                        <div class="bg-thai-cream rounded-xl p-3.5 border border-amber-200/80 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-sm sm:text-base">
+                            <div><span class="text-amber-800 font-bold">早餐：</span>敬請自理</div>
+                            <div><span class="text-amber-800 font-bold">午餐：</span>機上簡餐</div>
+                            <div><span class="text-amber-800 font-bold">晚餐：</span>樂來順或文華 中泰式合菜 (餐標 THB 350)</div>
+                        </div>
+                        <div class="text-sm sm:text-base font-bold text-thai-teal flex items-center gap-2">
+                            <i class="fa-solid fa-bed text-amber-600"></i> 住宿：Avani Sukhumvit Bangkok Hotel 或同級
                         </div>
                     </div>
-                    <p class="text-sm text-slate-700 leading-relaxed mb-2">
-                        <strong>【景點介紹】Save One Go 夜市：</strong>曼谷近年超人氣的在地人夜市！匯集道地泰式平價小吃、炭烤海鮮、泰式奶茶與潮流服飾，物價親民、氛圍輕鬆，是第一晚體驗曼谷夜生活與大啖美食的最佳去處。
-                    </p>
-                    <div class="grid grid-cols-4 gap-2 text-xs bg-thai-cream p-2 rounded-lg border border-amber-200">
-                        <div><strong>早餐：</strong>敬請自理</div>
-                        <div><strong>午餐：</strong>機上簡餐</div>
-                        <div><strong>晚餐：</strong>樂來順或文華 中泰式合菜 (餐標 THB 350)</div>
-                        <div><strong>住宿：</strong>Avani Sukhumvit Bangkok</div>
-                    </div>
-                </div>
+                </article>
 
                 <!-- Day 2 -->
-                <div class="avoid-break border border-amber-300 rounded-xl p-3.5 bg-white">
-                    <div class="flex items-center justify-between border-b border-amber-200 pb-1.5 mb-2">
-                        <div class="font-black text-base text-thai-teal">
-                            <span class="bg-thai-teal text-white text-xs px-2 py-0.5 rounded mr-2">DAY 2</span>
-                            2026/12/10 (四) 大皇宮與鄭王廟 → ICONSIAM 室內水上市場 → 河畔遊船晚宴
+                <article id="day-2" class="bg-white rounded-2xl border border-amber-300/70 shadow-sm overflow-hidden scroll-mt-4">
+                    <div class="bg-gradient-to-r from-[#0B5345] to-[#117864] px-4 py-3 text-white flex items-center justify-between border-b-2 border-amber-400">
+                        <div class="flex items-center gap-2.5">
+                            <span class="bg-amber-400 text-slate-950 font-black text-sm px-2.5 py-0.5 rounded shadow-2xs">DAY 2</span>
+                            <span class="font-bold text-base">2026/12/10 (四)</span>
+                        </div>
+                        <span class="text-sm text-amber-200 font-medium">皇室經典・河畔晚宴</span>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3.5">
+                        <h3 class="text-lg sm:text-xl font-black text-slate-900 leading-snug">
+                            大皇宮與鄭王廟 → ICONSIAM 室內水上市場 → 河畔遊船晚宴
+                        </h3>
+                        <ul class="text-base text-slate-600 space-y-2.5 leading-relaxed">
+                            <li><strong>• 大皇宮與鄭王廟：</strong>參觀匯聚泰國皇室建築藝術巔峰的金碧輝煌宮殿；隨後造訪擁有「泰國艾菲爾鐵塔」美譽的鄭王廟（黎明寺），純白佛塔鑲嵌彩色陶瓷片，壯麗非凡。</li>
+                            <li><strong>• ICONSIAM 暹羅天地（室內水上市場）：</strong>曼谷頂級河岸地標百貨！特別安排逛逛冷氣開放的「SOOKSIAM 室內水上市場」，將泰國77府傳統水上市集搬進室內，乾淨舒適又好拍。</li>
+                            <li><strong>• 昭披耶公主號遊船晚宴：</strong>夜幕低垂時搭乘豪華遊輪夜遊昭披耶河，在現場樂團演奏與微風中享用豐盛自助餐，欣賞兩岸大皇宮與鄭王廟點燈夜景。</li>
+                        </ul>
+                        <div class="bg-thai-cream rounded-xl p-3.5 border border-amber-200/80 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-sm sm:text-base">
+                            <div><span class="text-amber-800 font-bold">早餐：</span>飯店內用</div>
+                            <div><span class="text-amber-800 font-bold">午餐：</span>方便逛街 敬請自理</div>
+                            <div><span class="text-amber-800 font-bold">晚餐：</span>昭披耶公主號自助餐 (餐標 THB 750)</div>
+                        </div>
+                        <div class="text-sm sm:text-base font-bold text-thai-teal flex items-center gap-2">
+                            <i class="fa-solid fa-bed text-amber-600"></i> 住宿：Avani Sukhumvit Bangkok Hotel 或同級
                         </div>
                     </div>
-                    <p class="text-sm text-slate-700 leading-relaxed mb-2">
-                        <strong>【景點介紹】</strong><strong>大皇宮與鄭王廟：</strong>匯聚泰國皇室建築藝術巔峰的金碧輝煌宮殿；隨後造訪擁有「泰國艾菲爾鐵塔」美譽的鄭王廟。<strong>ICONSIAM 暹羅天地：</strong>曼谷頂級河岸地標百貨，安排逛逛冷氣開放的「SOOKSIAM 室內水上市場」。<strong>昭披耶公主號遊船晚宴：</strong>搭乘豪華遊輪夜遊昭披耶河，享用自助餐並欣賞兩岸皇宮寺廟夜景。
-                    </p>
-                    <div class="grid grid-cols-4 gap-2 text-xs bg-thai-cream p-2 rounded-lg border border-amber-200">
-                        <div><strong>早餐：</strong>飯店內用</div>
-                        <div><strong>午餐：</strong>方便逛街 敬請自理</div>
-                        <div><strong>晚餐：</strong>昭披耶公主號自助餐 (餐標 THB 750)</div>
-                        <div><strong>住宿：</strong>Avani Sukhumvit Bangkok</div>
-                    </div>
-                </div>
+                </article>
 
                 <!-- Day 3 -->
-                <div class="avoid-break border border-amber-300 rounded-xl p-3.5 bg-white">
-                    <div class="flex items-center justify-between border-b border-amber-200 pb-1.5 mb-2">
-                        <div class="font-black text-base text-thai-teal">
-                            <span class="bg-thai-teal text-white text-xs px-2 py-0.5 rounded mr-2">DAY 3</span>
-                            2026/12/11 (五) 大城世界遺產 → 瑪哈泰寺(樹中佛頭) → 柴瓦塔那蘭寺+泰服體驗 → 大城大頭蝦市場 → 邦巴茵夏宮 → Big C 超市大採購
+                <article id="day-3" class="bg-white rounded-2xl border border-amber-300/70 shadow-sm overflow-hidden scroll-mt-4">
+                    <div class="bg-gradient-to-r from-[#0B5345] to-[#117864] px-4 py-3 text-white flex items-center justify-between border-b-2 border-amber-400">
+                        <div class="flex items-center gap-2.5">
+                            <span class="bg-amber-400 text-slate-950 font-black text-sm px-2.5 py-0.5 rounded shadow-2xs">DAY 3</span>
+                            <span class="font-bold text-base">2026/12/11 (五)</span>
+                        </div>
+                        <span class="text-sm text-amber-200 font-medium">大城古都・泰服體驗</span>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3.5">
+                        <h3 class="text-lg sm:text-xl font-black text-slate-900 leading-snug">
+                            大城世界遺產 → 瑪哈泰寺(樹中佛頭) → 柴瓦塔那蘭寺+泰服體驗 → 大城大頭蝦市場 → 邦巴茵夏宮 → Big C 超市大採購
+                        </h3>
+                        <ul class="text-base text-slate-600 space-y-2.5 leading-relaxed">
+                            <li><strong>• 瑪哈泰寺（樹中佛頭）：</strong>大城最著名的奇觀，受菩提樹根溫柔包覆的慈祥佛頭，展現歷史與自然交織的震撼之美。</li>
+                            <li><strong>• 柴瓦塔那蘭寺＋泰服體驗：</strong>換上華麗典雅的傳統泰服，漫步於高棉風格的紅磚佛塔群間，輕鬆拍出穿越時空的皇室大片！</li>
+                            <li><strong>• 大城大頭蝦市場＆邦巴茵夏宮：</strong>午餐自理品嚐大城最著名的現烤爆膏大頭蝦；午後走訪融合泰式、中式與歐式建築的皇室避暑行宮「邦巴茵夏宮」，晚上前往 Big C 超市盡情採買伴手禮。</li>
+                        </ul>
+                        <!-- 特別提醒框 -->
+                        <div class="bg-amber-50 border-l-4 border-amber-500 p-3.5 rounded-r-xl text-sm sm:text-base text-amber-950 leading-relaxed">
+                            <strong>※ 註：</strong>參觀樹中佛如欲拍照留念，提醒您<strong>影中人身高不可高於佛頭</strong>，以免對神明造成不敬！
+                        </div>
+                        <div class="bg-thai-cream rounded-xl p-3.5 border border-amber-200/80 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-sm sm:text-base">
+                            <div><span class="text-amber-800 font-bold">早餐：</span>飯店內用</div>
+                            <div><span class="text-amber-800 font-bold">午餐：</span>方便逛街 敬請自理</div>
+                            <div><span class="text-amber-800 font-bold">晚餐：</span>方便逛街 敬請自理</div>
+                        </div>
+                        <div class="text-sm sm:text-base font-bold text-thai-teal flex items-center gap-2">
+                            <i class="fa-solid fa-bed text-amber-600"></i> 住宿：Avani Sukhumvit Bangkok Hotel 或同級
                         </div>
                     </div>
-                    <p class="text-sm text-slate-700 leading-relaxed mb-2">
-                        <strong>【景點介紹】</strong><strong>瑪哈泰寺（樹中佛頭）：</strong>受菩提樹根溫柔包覆的慈祥佛頭，為泰國七大奇景之一<span class="text-thai-red font-bold">（※註：參觀樹中佛如欲拍照留念，提醒您影中人身高不可高於佛頭，以免對神明造成不敬！）</span>。<strong>柴瓦塔那蘭寺＋泰服體驗：</strong>換上華麗傳統泰服漫步於紅磚佛塔群間。<strong>大城大頭蝦市場＆邦巴茵夏宮：</strong>品嚐現烤爆膏大頭蝦，走訪皇室避暑行宮，晚上至 Big C 超市採買伴手禮。
-                    </p>
-                    <div class="grid grid-cols-4 gap-2 text-xs bg-thai-cream p-2 rounded-lg border border-amber-200">
-                        <div><strong>早餐：</strong>飯店內用</div>
-                        <div><strong>午餐：</strong>方便逛街 敬請自理</div>
-                        <div><strong>晚餐：</strong>方便逛街 敬請自理</div>
-                        <div><strong>住宿：</strong>Avani Sukhumvit Bangkok</div>
-                    </div>
-                </div>
+                </article>
 
                 <!-- Day 4 -->
-                <div class="avoid-break border border-amber-300 rounded-xl p-3.5 bg-white">
-                    <div class="flex items-center justify-between border-b border-amber-200 pb-1.5 mb-2">
-                        <div class="font-black text-base text-thai-teal">
-                            <span class="bg-thai-teal text-white text-xs px-2 py-0.5 rounded mr-2">DAY 4</span>
-                            2026/12/12 (六) 丹能水上市場(含船) → 鐵道市場 → 網美泡泡屋(含一杯飲料) → 四面佛祈福 → 中央百貨商圈
+                <article id="day-4" class="bg-white rounded-2xl border border-amber-300/70 shadow-sm overflow-hidden scroll-mt-4">
+                    <div class="bg-gradient-to-r from-[#0B5345] to-[#117864] px-4 py-3 text-white flex items-center justify-between border-b-2 border-amber-400">
+                        <div class="flex items-center gap-2.5">
+                            <span class="bg-amber-400 text-slate-950 font-black text-sm px-2.5 py-0.5 rounded shadow-2xs">DAY 4</span>
+                            <span class="font-bold text-base">2026/12/12 (六)</span>
+                        </div>
+                        <span class="text-sm text-amber-200 font-medium">水上市集・網美泡泡屋</span>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3.5">
+                        <h3 class="text-lg sm:text-xl font-black text-slate-900 leading-snug">
+                            丹能水上市場(含船) → 鐵道市場 → 網美泡泡屋(含一杯飲料) → 四面佛祈福 → 中央百貨商圈
+                        </h3>
+                        <ul class="text-base text-slate-600 space-y-2.5 leading-relaxed">
+                            <li><strong>• 丹能莎朵水上市場（含手搖船）：</strong>搭乘傳統手搖船穿梭於熱鬧的運河水道，體驗與戴斗笠的船家交易熱帶水果與船麵的道地樂趣。</li>
+                            <li><strong>• 美功鐵道市場＆網美泡泡屋：</strong>親眼見證火車鳴笛緩緩駛過、攤販瞬間收起遮陽棚架的奇景；午後造訪夢幻水上漂浮「網美泡泡屋咖啡廳」，每人贈送一杯清涼飲料拍照打卡。</li>
+                            <li><strong>• 四面佛＆中央百貨商圈：</strong>返回曼谷市中心前往香火鼎盛的四面佛祈福，並逛逛亞洲最大購物中心之一的 Central World 商圈。</li>
+                        </ul>
+                        <!-- 特別提醒框 -->
+                        <div class="bg-amber-50 border-l-4 border-amber-500 p-3.5 rounded-r-xl text-sm sm:text-base text-amber-950 leading-relaxed">
+                            <strong>※ 註：</strong>菜市場鐵路火車之旅，常有誤點，敬請耐心等候。
+                        </div>
+                        <div class="bg-thai-cream rounded-xl p-3.5 border border-amber-200/80 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-sm sm:text-base">
+                            <div><span class="text-amber-800 font-bold">早餐：</span>飯店內用</div>
+                            <div><span class="text-amber-800 font-bold">午餐：</span>泰式風味餐 (餐標 THB 350)</div>
+                            <div><span class="text-amber-800 font-bold">晚餐：</span>Savoey Mercury分店 (代訂位/自點自付)</div>
+                        </div>
+                        <div class="text-sm sm:text-base font-bold text-thai-teal flex items-center gap-2">
+                            <i class="fa-solid fa-bed text-amber-600"></i> 住宿：Avani Sukhumvit Bangkok Hotel 或同級
                         </div>
                     </div>
-                    <p class="text-sm text-slate-700 leading-relaxed mb-2">
-                        <strong>【景點介紹】</strong><strong>丹能莎朵水上市場（含手搖船）：</strong>搭乘傳統手搖船穿梭於運河水道，體驗與船家交易熱帶水果的樂趣。<strong>美功鐵道市場＆網美泡泡屋：</strong>見證火車鳴笛駛過攤販棚架收合奇觀<span class="text-thai-red font-bold">（※註：菜市場鐵路火車之旅，常有誤點，敬請耐心等候）</span>；午後造訪水上漂浮「網美泡泡屋咖啡廳」。<strong>四面佛＆中央百貨：</strong>前往曼谷四面佛祈福並逛 Central World 商圈。
-                    </p>
-                    <div class="grid grid-cols-4 gap-2 text-xs bg-thai-cream p-2 rounded-lg border border-amber-200">
-                        <div><strong>早餐：</strong>飯店內用</div>
-                        <div><strong>午餐：</strong>泰式風味餐 (餐標 THB 350)</div>
-                        <div><strong>晚餐：</strong>Savoey Mercury分店 (代訂位/自點自付)</div>
-                        <div><strong>住宿：</strong>Avani Sukhumvit Bangkok</div>
-                    </div>
-                </div>
+                </article>
 
                 <!-- Day 5 -->
-                <div class="avoid-break border border-amber-300 rounded-xl p-3.5 bg-white">
-                    <div class="flex items-center justify-between border-b border-amber-200 pb-1.5 mb-2">
-                        <div class="font-black text-base text-thai-teal">
-                            <span class="bg-thai-red text-white text-xs px-2 py-0.5 rounded mr-2">DAY 5</span>
-                            2026/12/13 (日) 洽圖洽週末市集 (Chatuchak) → 曼谷國際機場 → 高雄小港機場
+                <article id="day-5" class="bg-white rounded-2xl border border-amber-300/70 shadow-sm overflow-hidden scroll-mt-4">
+                    <div class="bg-gradient-to-r from-thai-red to-[#7A1425] px-4 py-3 text-white flex items-center justify-between border-b-2 border-amber-400">
+                        <div class="flex items-center gap-2.5">
+                            <span class="bg-amber-400 text-slate-950 font-black text-sm px-2.5 py-0.5 rounded shadow-2xs">DAY 5</span>
+                            <span class="font-bold text-base">2026/12/13 (日)</span>
+                        </div>
+                        <span class="text-sm text-amber-200 font-medium">週末市集・滿載而歸</span>
+                    </div>
+                    <div class="p-4 sm:p-5 space-y-3.5">
+                        <h3 class="text-lg sm:text-xl font-black text-slate-900 leading-snug">
+                            洽圖洽週末市集 (Chatuchak) → 曼谷國際機場 → 高雄小港機場
+                        </h3>
+                        <p class="text-base text-slate-600 leading-relaxed">
+                            把握最後一天週日黃金時段，前往僅在週末營業的全球最大市集之一 <strong>洽圖洽週末市集 (Chatuchak Weekend Market)</strong>！擁有超過 15,000 個攤位，從設計師文創小物、香氛精油、藤編包到消暑椰子冰淇淋、手標泰式奶茶應有盡有，讓您在返台前滿載而歸！午後專車前往曼谷機場搭機返回高雄。
+                        </p>
+                        <div class="bg-thai-cream rounded-xl p-3.5 border border-amber-200/80 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-sm sm:text-base">
+                            <div><span class="text-amber-800 font-bold">早餐：</span>飯店內用</div>
+                            <div><span class="text-amber-800 font-bold">午餐：</span>方便逛街 敬請自理</div>
+                            <div><span class="text-amber-800 font-bold">晚餐：</span>機上簡餐</div>
+                        </div>
+                        <div class="text-sm sm:text-base font-bold text-thai-red flex items-center gap-2">
+                            <i class="fa-solid fa-house-chimney text-amber-600"></i> 住宿：溫暖的家
                         </div>
                     </div>
-                    <p class="text-sm text-slate-700 leading-relaxed mb-2">
-                        <strong>【景點介紹】洽圖洽週末市集：</strong>僅在週末營業的全球最大市集之一！擁有超過 15,000 個攤位，從文創小物、香氛精油、藤編包到椰子冰淇淋、手標奶茶應有盡有，讓您在返台前滿載而歸。
-                    </p>
-                    <div class="grid grid-cols-4 gap-2 text-xs bg-thai-cream p-2 rounded-lg border border-amber-200">
-                        <div><strong>早餐：</strong>飯店內用</div>
-                        <div><strong>午餐：</strong>方便逛街 敬請自理</div>
-                        <div><strong>晚餐：</strong>機上簡餐</div>
-                        <div><strong>住宿：</strong>溫暖的家</div>
-                    </div>
-                </div>
+                </article>
 
-                <p class="text-xs text-slate-500">
+                <div class="text-sm text-slate-600 bg-white p-4 rounded-xl border border-amber-300/70 leading-relaxed">
                     ★ 行程資料雖為制式，為使實務上操作更加順暢，請授權導遊並信任其因實際交通、氣候、突發狀況、旅遊規定等相關因素，以不影響行程之誠信原則作必要的調整。
-                </p>
+                </div>
             </section>
 
-            <!-- ================= 第三部分：泰國入境與旅遊注意事項 ================= -->
-            <section class="avoid-break space-y-3 pt-2">
-                <h2 class="text-lg font-black text-thai-teal border-b-2 border-amber-400 pb-1.5 flex items-center gap-2">
-                    <span class="text-amber-600">❖</span>
-                    <span>三、泰國入境與行前必讀注意事項</span>
-                </h2>
+            <!-- ================= 分頁 3：注意事項 (含泰國電子入境卡 TDAC) ================= -->
+            <section id="tab-notices" class="tab-content hidden space-y-5">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
+                        <span class="text-amber-600 text-2xl">❖</span>
+                        <span>泰國入境與行前必讀提醒</span>
+                    </h2>
+                    <span class="text-sm font-bold text-white bg-thai-red px-3 py-1 rounded-full shadow-2xs">重要必看</span>
+                </div>
 
-                <!-- TDAC 電子入境卡重點框 -->
-                <div class="bg-emerald-50/70 border-l-4 border-thai-teal border border-emerald-200 rounded-r-xl p-3.5 text-sm space-y-1">
-                    <div class="font-black text-thai-teal flex items-center justify-between">
-                        <span>📲 泰國電子入境卡申報（TDAC）— 出發前必填</span>
-                        <span class="text-xs font-mono text-slate-600">https://tdac.immigration.go.th/arrival-card/#/home</span>
+                <!-- 1. 泰國電子入境卡 TDAC 重點卡片 -->
+                <div class="bg-white rounded-2xl border-2 border-thai-teal shadow-md overflow-hidden">
+                    <div class="bg-gradient-to-r from-[#0B5345] to-[#117864] px-4 py-3 text-white flex items-center justify-between border-b-2 border-amber-400">
+                        <span class="text-base font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-mobile-screen-button text-amber-300"></i> 泰國電子入境卡申報（TDAC）
+                        </span>
+                        <span class="text-xs sm:text-sm bg-thai-red text-white px-2.5 py-0.5 rounded-full font-bold">出發前必填</span>
                     </div>
-                    <p class="text-slate-700 leading-relaxed">
-                        入境泰國前需事先於線上完成<strong>泰國數位入境卡（TDAC）</strong>免費申報，請務必於<strong>抵達泰國前 72 小時（3天）內</strong>準備護照、去回程航班（CI839 / CI840）及飯店名稱（Avani Sukhumvit Bangkok Hotel）上網填寫，完成後請將產生的 <strong>QR Code 確認信手機截圖或列印</strong>，於曼谷機場通關時出示查驗。
+                    <div class="p-4 sm:p-5 space-y-3.5 text-base">
+                        <p class="text-slate-700 leading-relaxed">
+                            入境泰國前需事先於線上完成<strong>泰國數位入境卡（Thailand Digital Arrival Card, TDAC）</strong>申報，請務必於<strong>抵達泰國前 72 小時（3天）內</strong>上網填寫：
+                        </p>
+                        <div class="bg-thai-cream p-4 rounded-xl border border-amber-300 space-y-2 text-sm sm:text-base text-slate-700">
+                            <div>• <strong>準備資料：</strong>護照個人資料頁、去回程航班資訊（CI839 / CI840）、住宿飯店名稱（Avani Sukhumvit Bangkok Hotel）。</div>
+                            <div>• <strong>填寫完成後：</strong>系統會產生一組 <strong>QR Code 確認信</strong>（亦會寄至您的 Email），請務必<strong>手機截圖保存或列印出來</strong>，於曼谷機場通關時出示給移民官查驗。</div>
+                            <div>• <strong>完全免費：</strong>官方網站申報無需任何費用，請勿點擊來路不明之付費代辦廣告網站。</div>
+                        </div>
+                        <a href="https://tdac.immigration.go.th/arrival-card/#/home" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#0B5345] to-[#117864] hover:from-[#072E26] hover:to-[#0B5345] text-amber-100 font-bold py-3.5 px-4 rounded-xl border border-amber-400/50 transition shadow-sm text-base">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-amber-300"></i> 前往泰國移民局 TDAC 官方申報網站
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. 入境海關與財力證明 -->
+                <div class="bg-white rounded-2xl border border-red-200 shadow-sm p-4 sm:p-5 space-y-3">
+                    <h3 class="text-lg font-bold text-thai-red flex items-center gap-2">
+                        <i class="fa-solid fa-passport"></i> 入境海關與攜帶現金提醒
+                    </h3>
+                    <div class="space-y-2.5 text-base text-slate-700 leading-relaxed">
+                        <div class="bg-red-50/80 p-3.5 rounded-xl border border-red-200 text-red-950">
+                            <strong><i class="fa-solid fa-sack-dollar mr-1.5 text-thai-red"></i>泰國海關隨機抽查財力：</strong><br>
+                            入境泰國每人須準備 <strong>20,000 泰銖</strong>、每個家庭 <strong>40,000 泰銖</strong>（等值美金、台幣現金亦可，不可用信用卡代替），以備海關人員隨機抽查。
+                        </div>
+                        <p>• <strong>攜帶現金上限：</strong>出入境各國攜帶現金請勿超過等值台幣拾萬元，超出部分請依規定申報。</p>
+                    </div>
+                </div>
+
+                <!-- 3. 行李託運與隨身安檢規定 -->
+                <div class="bg-white rounded-2xl border border-amber-300/70 shadow-sm p-4 sm:p-5 space-y-3">
+                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-suitcase-rolling text-amber-600"></i> 行李重量與安檢規定
+                    </h3>
+                    <div class="grid grid-cols-1 gap-3 text-base">
+                        <div class="p-3.5 rounded-xl bg-thai-cream border border-amber-200">
+                            <div class="font-bold text-slate-900 flex items-center justify-between">
+                                <span><i class="fa-solid fa-suitcase text-thai-teal mr-1.5"></i>託運行李</span>
+                                <span class="text-sm bg-emerald-100 text-thai-teal px-2.5 py-0.5 rounded font-bold">每人 1 件 / 限重 23 公斤</span>
+                            </div>
+                            <p class="text-sm sm:text-base text-slate-600 mt-1.5 leading-relaxed">中華航空團體機票可免費託運 1 件 23 公斤行李。液體類（超過100ml）、噴霧、剪刀、指甲刀、自拍棒（超過25cm）及傘具請放置於託運行李中。</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-amber-50/90 border border-amber-300">
+                            <div class="font-bold text-amber-950 flex items-center justify-between">
+                                <span><i class="fa-solid fa-bolt text-amber-600 mr-1.5"></i>手提隨身行李（電池嚴禁託運）</span>
+                                <span class="text-sm bg-amber-200 text-amber-950 px-2.5 py-0.5 rounded font-bold">限重 7 公斤</span>
+                            </div>
+                            <p class="text-sm sm:text-base text-amber-950 mt-1.5 leading-relaxed">
+                                手機電池、相機電池、<strong>行動電源（務必標示清晰容量 Wh/mAh）</strong>、藍牙耳機充電盒及打火機（限1個），<strong>務必放置於隨身行李中攜帶上機，嚴禁託運！</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 導遊、司機服務小費提醒 -->
+                <div class="bg-white rounded-2xl border border-amber-300/70 shadow-sm p-4 sm:p-5 space-y-2.5">
+                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-hand-holding-dollar text-amber-600"></i> 導遊、司機服務小費提醒（行程不含小費）
+                    </h3>
+                    <div class="p-3.5 rounded-xl bg-thai-goldLight/60 border border-amber-300 text-base text-amber-950 leading-relaxed">
+                        本行程團費<strong>不含</strong>導遊與司機服務小費，建議每位貴賓每日給予 <strong>台幣 NT$300 元 × 5 日 ＝ 共新台幣 1,500 元</strong>（於行程最後一日交予導遊統籌分配，感謝辛勞服務）。
+                    </div>
+                </div>
+
+                <!-- 5. 泰國旅遊生活須知 -->
+                <div class="bg-white rounded-2xl border border-amber-300/70 shadow-sm p-4 sm:p-5 space-y-3">
+                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-thai-teal"></i> 泰國當地氣候、電壓與文化禮儀
+                    </h3>
+                    <ul class="text-base text-slate-700 space-y-2.5 leading-relaxed">
+                        <li>• <strong>電壓與插座：</strong>泰國電壓為 <strong>220V</strong>（台灣為110V）。手機、相機充電器多支援 100-240V 國際電壓（雙扁孔可直接插入），若攜帶吹風機或電捲棒請務必確認支援 220V。</li>
+                        <li>• <strong>天氣與衣著：</strong>12月為泰國涼季，白天氣溫約 <strong>25°C - 32°C</strong> 舒適晴朗，請準備夏季透氣衣物、防曬用品、太陽眼鏡，並隨身攜帶一件薄外套防遊覽車冷氣。</li>
+                        <li>• <strong>參觀大皇宮服裝規定：</strong>皇宮與佛寺對服裝要求嚴格，<strong>不可穿無袖上衣、露肩背心、短褲、破洞牛仔褲、緊身瑜珈褲及拖鞋</strong>，請著有袖上衣搭配長褲或過膝長裙。</li>
+                        <li>• <strong>敬重皇室與僧侶：</strong>泰國人極為敬重皇室與佛教，切勿評論泰國皇室；女性請勿觸碰僧侶身體或衣物；拍攝佛像時請保持恭敬（拍樹中佛頭時人不可高於佛頭）。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ================= 分頁 4：匯率換算機 ================= -->
+            <section id="tab-currency" class="tab-content hidden space-y-5">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
+                        <span class="text-amber-600 text-2xl">❖</span>
+                        <span>泰銖 THB ⇄ 台幣 TWD 換算機</span>
+                    </h2>
+                    <span id="rate-status-badge" class="text-sm font-bold text-thai-teal bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-rotate mr-1"></i>即時匯率載入中...
+                    </span>
+                </div>
+
+                <!-- 匯率換算主卡片 -->
+                <div class="bg-white rounded-3xl border-2 border-amber-400/70 shadow-md p-5 sm:p-6 space-y-5">
+                    
+                    <!-- 目前匯率顯示與微調 -->
+                    <div class="bg-gradient-to-r from-[#072E26] to-[#0E4D40] text-white rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-2 border border-amber-400/50">
+                        <div>
+                            <div class="text-xs sm:text-sm text-amber-200/80">目前參考匯率（可手動微調）</div>
+                            <div class="text-lg sm:text-xl font-black text-amber-300 mt-0.5">
+                                1 泰銖 (THB) ≈ <span id="display-rate-twd">0.95</span> 台幣 (TWD)
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label for="custom-rate-input" class="text-xs sm:text-sm text-amber-100">自訂匯率:</label>
+                            <input type="number" id="custom-rate-input" step="0.001" value="0.950" 
+                                   class="w-24 bg-white/15 border border-amber-300/40 rounded-lg px-2.5 py-1.5 text-right text-base font-bold text-amber-300 focus:outline-none focus:border-amber-300"
+                                   oninput="updateCustomRate(this.value)">
+                        </div>
+                    </div>
+
+                    <!-- 泰銖輸入框 -->
+                    <div class="space-y-1.5">
+                        <label class="text-sm sm:text-base font-bold text-slate-700 flex items-center justify-between">
+                            <span>🇹🇭 泰銖金額 (THB)</span>
+                            <span class="text-xs sm:text-sm text-slate-400">當地標價輸入這裡</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-black text-amber-600">฿</span>
+                            <input type="number" id="input-thb" inputmode="decimal" placeholder="例如: 100" value="100"
+                                   class="w-full pl-12 pr-16 py-4 text-3xl font-black text-slate-900 bg-thai-cream border-2 border-amber-300 rounded-2xl focus:outline-none focus:border-thai-teal focus:bg-white transition"
+                                   oninput="convertFromTHB(this.value)">
+                            <button onclick="clearCurrency()" class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-500 hover:text-slate-700 bg-amber-200/60 px-3 py-1.5 rounded-lg">清除</button>
+                        </div>
+                    </div>
+
+                    <!-- 雙向箭頭圖示 -->
+                    <div class="flex justify-center -my-1">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center border border-amber-300 shadow-2xs">
+                            <i class="fa-solid fa-arrow-up-arrow-down text-base"></i>
+                        </div>
+                    </div>
+
+                    <!-- 台幣輸入框 -->
+                    <div class="space-y-1.5">
+                        <label class="text-sm sm:text-base font-bold text-slate-700 flex items-center justify-between">
+                            <span>🇹🇼 約合新台幣 (TWD)</span>
+                            <span class="text-xs sm:text-sm text-slate-400">也可輸入台幣反算泰銖</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xl font-black text-thai-teal">NT$</span>
+                            <input type="number" id="input-twd" inputmode="decimal" placeholder="0" value="95"
+                                   class="w-full pl-16 pr-4 py-4 text-3xl font-black text-thai-teal bg-emerald-50/40 border-2 border-emerald-200 rounded-2xl focus:outline-none focus:border-thai-teal focus:bg-white transition"
+                                   oninput="convertFromTWD(this.value)">
+                        </div>
+                    </div>
+
+                    <!-- 逛街常用面額一鍵點擊 -->
+                    <div class="pt-1">
+                        <div class="text-xs sm:text-sm font-bold text-slate-500 mb-2">逛街殺價常用泰銖面額：</div>
+                        <div class="grid grid-cols-5 gap-2">
+                            <button onclick="setQuickTHB(20)" class="py-2.5 rounded-xl bg-thai-cream hover:bg-amber-200/70 text-slate-800 font-bold text-sm sm:text-base border border-amber-300 transition active:scale-95">฿20</button>
+                            <button onclick="setQuickTHB(50)" class="py-2.5 rounded-xl bg-thai-cream hover:bg-amber-200/70 text-slate-800 font-bold text-sm sm:text-base border border-amber-300 transition active:scale-95">฿50</button>
+                            <button onclick="setQuickTHB(100)" class="py-2.5 rounded-xl bg-thai-cream hover:bg-amber-200/70 text-slate-800 font-bold text-sm sm:text-base border border-amber-300 transition active:scale-95">฿100</button>
+                            <button onclick="setQuickTHB(500)" class="py-2.5 rounded-xl bg-thai-cream hover:bg-amber-200/70 text-slate-800 font-bold text-sm sm:text-base border border-amber-300 transition active:scale-95">฿500</button>
+                            <button onclick="setQuickTHB(1000)" class="py-2.5 rounded-xl bg-thai-cream hover:bg-amber-200/70 text-slate-800 font-bold text-sm sm:text-base border border-amber-300 transition active:scale-95">฿1000</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 泰國實用消費與小費參考 -->
+                <div class="bg-white rounded-2xl border border-amber-300/70 p-4 sm:p-5 space-y-2.5">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-coins text-amber-500"></i> 泰國當地小費與物價小貼士
+                    </h3>
+                    <ul class="text-sm sm:text-base text-slate-600 space-y-2 leading-relaxed">
+                        <li>• <strong>床頭小費：</strong>每天早上離開飯店房間前，可於床頭放置 <strong>20 泰銖紙鈔</strong>（請勿放硬幣，泰國習俗硬幣是給乞丐的）。</li>
+                        <li>• <strong>泰式按摩小費：</strong>視按摩時間與滿意度，通常給予按摩師 <strong>50 – 100 泰銖</strong>。</li>
+                        <li>• <strong>換匯建議：</strong>在泰國當地「SuperRich」等換匯所使用<strong>台幣 1,000 元大鈔</strong>直接兌換泰銖，匯率通常比台灣銀行更划算！</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ================= 分頁 5：導遊群組與意見調查表 ================= -->
+            <section id="tab-line-group" class="tab-content hidden space-y-5">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl sm:text-2xl font-black text-thai-teal flex items-center gap-2">
+                        <span class="text-amber-600 text-2xl">❖</span>
+                        <span>LINE 導遊聯絡群組</span>
+                    </h2>
+                    <span class="text-sm font-bold text-white bg-[#06C755] px-3 py-1 rounded-full shadow-2xs">請務必加入</span>
+                </div>
+
+                <!-- LINE 群組 QR Code 卡片 -->
+                <div class="bg-white rounded-3xl border border-amber-300/80 shadow-md p-6 text-center space-y-4">
+                    <div class="inline-flex items-center gap-2 bg-[#06C755]/10 text-[#06C755] px-4 py-1.5 rounded-full text-base font-black">
+                        <i class="fa-brands fa-line text-xl"></i> 2026/12/09 曼谷大城５日貴賓群組
+                    </div>
+
+                    <p class="text-base text-slate-600 max-w-sm mx-auto leading-relaxed">
+                        為了方便行程中通知集合時間、發送團體美照及緊急聯繫，請掃描下方 QR Code 或點擊按鈕加入專屬 LINE 群組！
                     </p>
+
+                    <!-- QR Code 容器（以泰式金箔相框點綴） -->
+                    <div class="flex justify-center py-2">
+                        <div class="p-4 bg-white rounded-2xl border-2 border-amber-400 shadow-sm inline-block relative">
+                            <div id="line-qrcode" class="flex items-center justify-center"></div>
+                        </div>
+                    </div>
+
+                    <div class="text-sm sm:text-base text-amber-900 font-bold bg-amber-100/70 border border-amber-300 py-2.5 px-3.5 rounded-xl">
+                        💡 加入群組後，請留言告知您的「中文姓名」方便導遊核對喔！
+                    </div>
+
+                    <!-- 手機直接點擊加入按鈕 -->
+                    <div class="pt-1 space-y-2.5">
+                        <a href="https://line.me/ti/g/BKK05261209M" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#06C755] hover:bg-[#05b34c] text-white font-black py-4 px-5 rounded-2xl transition shadow-md text-lg">
+                            <i class="fa-brands fa-line text-2xl"></i> 手機直接點此加入 LINE 群組
+                        </a>
+                        <button onclick="copyGroupLink()" class="w-full flex items-center justify-center gap-2 bg-thai-cream hover:bg-amber-100 text-slate-700 font-bold py-3 px-4 rounded-xl border border-amber-300 transition text-sm sm:text-base">
+                            <i class="fa-regular fa-copy"></i> <span id="copy-btn-text">複製群組邀請連結</span>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- 四宮格注意事項 -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                    <div class="border border-red-200 bg-red-50/50 rounded-xl p-3.5">
-                        <div class="font-black text-thai-red mb-1">🛃 入境海關與攜帶現金提醒</div>
-                        <p class="text-slate-700 leading-relaxed">
-                            • 泰國海關隨機抽查：<strong>每人須準備 20,000 泰銖、每個家庭 40,000 泰銖</strong>（等值美金、台幣現金亦可，不可用信用卡代替）。<br>
-                            • 攜帶現金上限：出入境攜帶現金<strong>勿超過等值台幣拾萬元</strong>。
-                        </p>
+                <!-- 團體旅遊意見調查表 QR Code 卡片 -->
+                <div class="bg-white rounded-3xl border border-amber-300/80 shadow-md p-6 text-center space-y-4">
+                    <div class="inline-flex items-center gap-2 bg-amber-100 text-amber-950 border border-amber-300 px-4 py-1.5 rounded-full text-base font-black">
+                        <i class="fa-solid fa-clipboard-check text-thai-red text-lg"></i> 團體旅遊意見調查表
                     </div>
-                    <div class="border border-amber-300 bg-thai-cream rounded-xl p-3.5">
-                        <div class="font-black text-amber-950 mb-1">🧳 行李重量與安檢規定</div>
-                        <p class="text-slate-700 leading-relaxed">
-                            • <strong>託運行李：</strong>每人限重 <strong>23 公斤（1件）</strong>；液體類、噴霧及尖銳物品請放置於託運行李中。<br>
-                            • <strong>手提行李：</strong>每人限重 <strong>7 公斤</strong>；手機電池、相機電池、<strong>行動電源</strong>等鋰電池及打火機（限1個），<strong>務必放置隨身行李（不可託運）</strong>。
-                        </p>
+
+                    <p class="text-base text-slate-600 max-w-sm mx-auto leading-relaxed">
+                        您的寶貴意見是我們提升服務品質的最大動力！行程圓滿結束前，歡迎掃描下方 QR Code 填寫山富旅遊線上意見調查表。
+                    </p>
+
+                    <!-- 意見調查表 QR Code 容器 -->
+                    <div class="flex justify-center py-1">
+                        <div class="p-4 bg-white rounded-2xl border-2 border-amber-400 shadow-sm inline-block relative">
+                            <div id="survey-qrcode" class="flex items-center justify-center"></div>
+                        </div>
                     </div>
-                    <div class="border border-amber-300 bg-white rounded-xl p-3.5">
-                        <div class="font-black text-slate-900 mb-1">🔌 電壓插座與天氣衣著</div>
-                        <p class="text-slate-700 leading-relaxed">
-                            • <strong>電壓 220V：</strong>手機充電器多支援 100-240V 國際電壓（雙扁孔通用），高功率電器請確認支援 220V。<br>
-                            • <strong>氣候炎熱：</strong>白天約 25°C - 32°C，請注意防曬並多補充水分，建議隨身帶薄外套防遊覽車冷氣。
-                        </p>
-                    </div>
-                    <div class="border border-amber-300 bg-white rounded-xl p-3.5">
-                        <div class="font-black text-slate-900 mb-1">🛕 景點參觀與文化禮儀</div>
-                        <p class="text-slate-700 leading-relaxed">
-                            • <strong>大皇宮服裝：</strong>需著有袖上衣、長褲或過膝長裙（禁無袖、短褲、破洞褲及拖鞋）。<br>
-                            • <strong>敬重神明皇室：</strong>拍樹中佛頭時人不可高於佛頭；女性不可觸碰僧侶；切勿評論泰國皇室。
-                        </p>
+
+                    <div class="pt-1">
+                        <a href="https://www.travel4u.com.tw/survey/BKK05261209M" target="_blank" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#0B5345] to-[#117864] hover:from-[#072E26] hover:to-[#0B5345] text-amber-100 font-black py-3.5 px-5 rounded-2xl border border-amber-400/50 transition shadow-sm text-base">
+                            <i class="fa-solid fa-pen-to-square text-amber-300"></i> 手機直接點此填寫意見調查表
+                        </a>
                     </div>
                 </div>
-            </section>
 
-            <!-- ================= 第四部分：LINE 群組、意見表 QR Code 與聯絡資訊 ================= -->
-            <section class="avoid-break pt-2">
-                <h2 class="text-lg font-black text-thai-teal border-b-2 border-amber-400 pb-1.5 mb-3 flex items-center gap-2">
-                    <span class="text-amber-600">❖</span>
-                    <span>四、導遊 LINE 群組、意見調查表與緊急聯絡資訊</span>
-                </h2>
-
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center bg-thai-cream p-4 rounded-2xl border border-amber-300">
-                    <!-- LINE 群組 QR -->
-                    <div class="flex flex-col items-center text-center bg-white p-3 rounded-xl border border-amber-200">
-                        <div class="text-xs font-black text-[#06C755] mb-1.5">
-                            <i class="fa-brands fa-line mr-1"></i>掃碼加入 LINE 導遊群組
+                <!-- 緊急聯絡資訊卡 -->
+                <div class="bg-white rounded-2xl border border-amber-300/70 p-4 sm:p-5 space-y-3">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-phone-volume text-thai-red"></i> 山富旅遊聯絡人資訊
+                    </h3>
+                    <div class="divide-y divide-amber-100 text-base">
+                        <div class="py-3 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs sm:text-sm text-slate-400">小港機場送機人員</div>
+                                <div class="font-bold text-slate-900">楊小姐</div>
+                            </div>
+                            <a href="tel:0983215129" class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-950 border border-amber-300 font-bold px-4 py-2 rounded-xl text-sm sm:text-base">
+                                <i class="fa-solid fa-phone text-thai-teal"></i> 0983-215129
+                            </a>
                         </div>
-                        <div id="print-line-qrcode" class="p-1 bg-white"></div>
-                        <div class="text-[11px] text-slate-500 mt-1.5">入群請留言告知「中文姓名」</div>
-                    </div>
-
-                    <!-- 意見調查表 QR -->
-                    <div class="flex flex-col items-center text-center bg-white p-3 rounded-xl border border-amber-200">
-                        <div class="text-xs font-black text-thai-red mb-1.5">
-                            <i class="fa-solid fa-clipboard-check mr-1"></i>團體旅遊意見調查表
-                        </div>
-                        <div id="print-survey-qrcode" class="p-1 bg-white"></div>
-                        <div class="text-[11px] text-slate-500 mt-1.5">歡迎掃碼填寫寶貴意見</div>
-                    </div>
-
-                    <!-- 山富旅遊聯絡人 -->
-                    <div class="space-y-2.5 text-sm bg-white p-4 rounded-xl border border-amber-200 h-full flex flex-col justify-center">
-                        <div class="font-black text-thai-teal text-base border-b border-amber-200 pb-1">山富旅遊聯絡資訊</div>
-                        <div>
-                            <div class="text-xs text-slate-500">小港機場送機人員</div>
-                            <div class="font-bold text-slate-900">楊小姐 <span class="text-thai-teal ml-1">0983-215129</span></div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-slate-500">山富旅遊客服人員</div>
-                            <div class="font-bold text-slate-900">蔡明洹 小姐 <span class="text-thai-teal ml-1">0911-799023</span></div>
+                        <div class="py-3 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs sm:text-sm text-slate-400">山富旅遊客服人員</div>
+                                <div class="font-bold text-slate-900">蔡明洹 小姐</div>
+                            </div>
+                            <a href="tel:0911799023" class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-950 border border-amber-300 font-bold px-4 py-2 rounded-xl text-sm sm:text-base">
+                                <i class="fa-solid fa-phone text-thai-teal"></i> 0911-799023
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -408,39 +728,193 @@
 
         </main>
 
-        <!-- 頁尾 -->
-        <footer class="px-6 py-3 bg-thai-silk border-t border-amber-300 text-center text-xs text-amber-950 font-medium">
-            山富國際旅行社股份有限公司 ｜ 團體編號：BKK05261209M ｜ 祝您旅途愉快 Sawasdee Ka!
+        <!-- 底部頁尾版權：泰式古典暖金風格 -->
+        <footer class="px-6 py-4 text-center text-sm text-amber-900/75 border-t border-amber-300/60 bg-thai-silk/60 font-medium">
+            <span class="text-amber-600 mr-1">✦</span>
+            山富國際旅行社股份有限公司 ｜ 祝您旅途愉快 Sawasdee Ka!
+            <span class="text-amber-600 ml-1">✦</span>
         </footer>
     </div>
 
+    <!-- 底部固定分頁導覽列 (Bottom Navigation Bar)：泰式金箔鑲邊 -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#FDF9F0]/95 backdrop-blur-md border-t-2 border-amber-400 shadow-[0_-4px_20px_rgba(45,32,12,0.08)]">
+        <div class="max-w-2xl mx-auto grid grid-cols-5 h-[4.5rem] px-1">
+            <button onclick="switchTab('tab-flight-hotel', this)" class="nav-btn active flex flex-col items-center justify-center gap-1 text-thai-teal font-bold transition">
+                <i class="fa-solid fa-plane-up text-xl"></i>
+                <span class="text-xs sm:text-sm">航班飯店</span>
+            </button>
+            <button onclick="switchTab('tab-itinerary', this)" class="nav-btn flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-thai-teal font-medium transition">
+                <i class="fa-solid fa-map-location-dot text-xl"></i>
+                <span class="text-xs sm:text-sm">每日行程</span>
+            </button>
+            <button onclick="switchTab('tab-notices', this)" class="nav-btn flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-thai-teal font-medium transition relative">
+                <i class="fa-solid fa-passport text-xl"></i>
+                <span class="text-xs sm:text-sm">注意事項</span>
+                <span class="absolute top-2 right-4 sm:right-6 w-2 h-2 rounded-full bg-thai-red"></span>
+            </button>
+            <button onclick="switchTab('tab-currency', this)" class="nav-btn flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-thai-teal font-medium transition">
+                <i class="fa-solid fa-coins text-xl"></i>
+                <span class="text-xs sm:text-sm">匯率換算</span>
+            </button>
+            <button onclick="switchTab('tab-line-group', this)" class="nav-btn flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-thai-teal font-medium transition">
+                <i class="fa-brands fa-line text-xl"></i>
+                <span class="text-xs sm:text-sm">導遊群組</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 提示訊息 Toast -->
+    <div id="toast-msg" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-[#072E26] text-amber-200 border border-amber-400/60 text-base font-bold px-5 py-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-300">
+        已複製群組邀請連結！
+    </div>
+
     <script>
-        window.onload = function() {
-            // 生成 LINE 群組 QR Code
-            const lineQr = document.getElementById('print-line-qrcode');
-            if (lineQr && typeof QRCode !== 'undefined') {
-                new QRCode(lineQr, {
+        // ================= 1. 分頁切換邏輯 =================
+        function switchTab(tabId, btnElement) {
+            // 隱藏所有分頁
+            document.querySelectorAll('.tab-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            // 顯示目標分頁
+            const target = document.getElementById(tabId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // 更新導覽按鈕樣式
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active', 'text-thai-teal', 'font-bold');
+                btn.classList.add('text-slate-500', 'font-medium');
+            });
+            if (btnElement) {
+                btnElement.classList.add('active', 'text-thai-teal', 'font-bold');
+                btnElement.classList.remove('text-slate-500', 'font-medium');
+            }
+
+            // 自動滾動回頂部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ================= 2. 匯率換算邏輯 (THB <-> TWD) =================
+        let thbToTwdRate = 0.950; // 預設安全匯率 (1 THB ≈ 0.95 TWD)
+
+        // 嘗試抓取最新即時匯率 (open.er-api.com 免費無需金鑰)
+        async function fetchLiveExchangeRate() {
+            const badge = document.getElementById('rate-status-badge');
+            try {
+                const response = await fetch('https://open.er-api.com/v6/latest/THB');
+                const data = await response.json();
+                if (data && data.rates && data.rates.TWD) {
+                    thbToTwdRate = parseFloat(data.rates.TWD.toFixed(4));
+                    document.getElementById('display-rate-twd').textContent = thbToTwdRate.toFixed(3);
+                    document.getElementById('custom-rate-input').value = thbToTwdRate.toFixed(3);
+                    
+                    // 重新計算目前輸入框數值
+                    const currentThb = document.getElementById('input-thb').value;
+                    if (currentThb) convertFromTHB(currentThb);
+
+                    badge.innerHTML = '<i class="fa-solid fa-check-circle mr-1 text-emerald-600"></i>已更新今日參考匯率';
+                    badge.className = 'text-sm font-bold text-thai-teal bg-emerald-100/80 border border-emerald-300 px-3 py-1 rounded-full';
+                }
+            } catch (error) {
+                // 若離線或 API 無法連線則保留預設匯率
+                badge.innerHTML = '<i class="fa-solid fa-circle-info mr-1 text-amber-600"></i>使用離線參考匯率';
+            }
+        }
+
+        function updateCustomRate(val) {
+            const parsed = parseFloat(val);
+            if (!isNaN(parsed) && parsed > 0) {
+                thbToTwdRate = parsed;
+                document.getElementById('display-rate-twd').textContent = thbToTwdRate.toFixed(3);
+                const currentThb = document.getElementById('input-thb').value;
+                if (currentThb) convertFromTHB(currentThb);
+            }
+        }
+
+        function convertFromTHB(thbVal) {
+            const twdInput = document.getElementById('input-twd');
+            if (thbVal === '' || isNaN(thbVal)) {
+                twdInput.value = '';
+                return;
+            }
+            const twd = parseFloat(thbVal) * thbToTwdRate;
+            twdInput.value = Math.round(twd * 10) / 10;
+        }
+
+        function convertFromTWD(twdVal) {
+            const thbInput = document.getElementById('input-thb');
+            if (twdVal === '' || isNaN(twdVal)) {
+                thbInput.value = '';
+                return;
+            }
+            const thb = parseFloat(twdVal) / thbToTwdRate;
+            thbInput.value = Math.round(thb * 10) / 10;
+        }
+
+        function setQuickTHB(amount) {
+            const thbInput = document.getElementById('input-thb');
+            thbInput.value = amount;
+            convertFromTHB(amount);
+        }
+
+        function clearCurrency() {
+            document.getElementById('input-thb').value = '';
+            document.getElementById('input-twd').value = '';
+            document.getElementById('input-thb').focus();
+        }
+
+        // ================= 3. LINE 群組與意見調查表 QR Code 生成與複製連結 =================
+        function initQRCodes() {
+            // 1. LINE 群組 QR Code
+            const lineQrContainer = document.getElementById('line-qrcode');
+            if (lineQrContainer && typeof QRCode !== 'undefined') {
+                lineQrContainer.innerHTML = '';
+                new QRCode(lineQrContainer, {
                     text: "https://line.me/ti/g/BKK05261209M",
-                    width: 112,
-                    height: 112,
+                    width: 185,
+                    height: 185,
                     colorDark : "#0f172a",
                     colorLight : "#ffffff",
                     correctLevel : QRCode.CorrectLevel.H
                 });
             }
 
-            // 生成意見調查表 QR Code
-            const surveyQr = document.getElementById('print-survey-qrcode');
-            if (surveyQr && typeof QRCode !== 'undefined') {
-                new QRCode(surveyQr, {
+            // 2. 團體旅遊意見調查表 QR Code
+            const surveyQrContainer = document.getElementById('survey-qrcode');
+            if (surveyQrContainer && typeof QRCode !== 'undefined') {
+                surveyQrContainer.innerHTML = '';
+                new QRCode(surveyQrContainer, {
                     text: "https://www.travel4u.com.tw/survey/BKK05261209M",
-                    width: 112,
-                    height: 112,
+                    width: 185,
+                    height: 185,
                     colorDark : "#0f172a",
                     colorLight : "#ffffff",
                     correctLevel : QRCode.CorrectLevel.M
                 });
             }
+        }
+
+        function copyGroupLink() {
+            const linkText = "https://line.me/ti/g/BKK05261209M";
+            const tempInput = document.createElement("input");
+            tempInput.value = linkText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById('toast-msg');
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2200);
+        }
+
+        // 頁面載入後初始化
+        window.onload = function() {
+            fetchLiveExchangeRate();
+            initQRCodes();
         };
     </script>
 </body>
